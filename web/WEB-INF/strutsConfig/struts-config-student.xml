@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <!-- ========== Form Bean Definitions ================================== -->
+
+    <form-beans>
+       <form-bean name="createMsgForm"        type="ps.edu.diyar.messaging.forms.CreateMsgForm"/>
+       <form-bean name="StudSasInitialFinancialForm"        type="ps.edu.diyar.studentInfo.forms.StudSasInitialFinancialForm"/>
+       <form-bean name="updatePasswordForm"   type="ps.edu.diyar.studentInfo.forms.UpdatePasswordForm"/>
+       <form-bean name="studSocialSurveyForm" type="ps.edu.diyar.studentInfo.forms.StudSocialSurveyForm"/>
+       <form-bean name="studSocialSurveyAcadDtlForm" type="ps.edu.diyar.studentInfo.forms.StudSocialSurveyAcadDtlForm"/>
+       <form-bean name="srvyWorkDetailForm"          type="ps.edu.diyar.studentInfo.forms.SrvyWorkDetailForm"/>
+       <form-bean name="srvyWorkRelativeForm"        type="ps.edu.diyar.studentInfo.forms.SrvyWorkRelativeForm"/>
+       <form-bean name="srvyHealthDetailForm"        type="ps.edu.diyar.studentInfo.forms.SrvyHealthDetailForm"/>
+       <form-bean name="srvyHousingForm"             type="ps.edu.diyar.studentInfo.forms.SrvyHousingForm"/>
+       <form-bean name="srvyLoanForm"                type="ps.edu.diyar.studentInfo.forms.SrvyLoanForm"/>
+       <form-bean name="srvyStrategicForm"           type="ps.edu.diyar.studentInfo.forms.SrvyStrategicForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="null.error" type="java.lang.NullPointerException" path="/errorPageAction.do"/>
+    </global-exceptions>
+
+    <!-- ========== Global Forward Definitions =============================== -->
+
+    <global-forwards>
+         <forward name="logout" path="/logout.do"/>
+         <forward name="invalidAccess" path="/invalidAccess.do" />
+    </global-forwards>
+
+    <!-- ========== Action Mapping Definitions =============================== -->
+
+    <action-mappings>
+
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/pages/drPortalIndex.jsp"
+            path="/diyarLogin"/>
+
+        <action
+            type="ps.edu.diyar.common.actions.InvalidAccessAction"
+            path="/invalidAccess">
+            <forward name="success" path="/logout.do"  />
+        </action>
+
+        <action
+            type="ps.edu.diyar.logout.actions.LogoutAction"
+            path="/logout">
+            <forward name="logoutDone" path="/diyarLogin.do"  contextRelative="true"/>
+        </action>        
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/errorPageAction"
+            parameter="/pages/invalidPage.jsp"
+            />
+
+          <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/main"
+            parameter="/pages/studentInfo/main.jsp"
+             
+            />
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.MainPageAction"
+            path="/studMain">
+            <forward name="mainPage" path="studentInfo.main.tile" contextRelative="true"/>
+            <forward name="fail"     path="studentInfo.processResult.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowTermSummaryAction"
+            path="/showTermSummary">
+            <forward name="success" path="studentInfo.termSummary.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowTermFinancialAction"
+            path="/showTermFinancial">
+            <forward name="success" path="studentInfo.termFinancial.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowMessagesAction"
+            path="/showMessages">
+            <forward name="success" path="studentInfo.showMessages.tile" contextRelative="true"/>
+        </action>
+
+<action
+            type="ps.edu.diyar.studentInfo.actions.ShowSelectedTermFinancialAction"
+            path="/showSelectedTermFinancial">
+            <forward name="success" path="studentInfo.termFinancial.tile" contextRelative="true"/>
+        </action>
+        
+         <action
+            type="ps.edu.diyar.studentInfo.actions.ShowSelectedTermSummaryAction"
+            path="/showSelectedTermSummary">
+            <forward name="success" path="studentInfo.termSummary.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowSelectedCourseSummaryAction"
+            path="/showSelectedCourseSummary">
+            <forward name="success" path="/pages/studentInfo/courseMarksDetails.jsp" contextRelative="true"/>
+        </action>
+        
+        
+         <action
+            type="ps.edu.diyar.messaging.actions.ViewAllMsgAction"
+            path="/viewUserMessages">
+            <forward name="success" path="studentInfo.viewUserMessages.tile" contextRelative="true"/>
+        </action>
+
+           <action
+                type="ps.edu.diyar.messaging.actions.ViewSentMsgAction"
+                path="/viewSentMessages">
+                <forward name="success" path="studentInfo.viewUserSentMessages.tile" contextRelative="true"/>
+            </action>
+        <action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.CreateMsgAction"
+            path="/createUserMessages">
+            <forward name="showPage" path="studentInfo.createUserMessages.tile" contextRelative="true"/>
+        </action>
+
+
+            <action
+                name="StudSasInitialFinancialForm"
+                validate="true"
+                 input="/crsReg.do"
+                scope="request"
+                type="ps.edu.diyar.studentInfo.actions.CalculateHoursFeesAction"
+                path="/calculateHoursFees">
+                
+                 <forward name="calculate" path="/crsReg.do"/>
+            </action>
+
+        
+        <action
+            name="createMsgForm"
+            validate="true"
+            input="/createUserMessages.do"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.SendMsgAction"
+            path="/sendUserMessages">
+            <forward name="success" path="studentInfo.processResult.tile" contextRelative="true"/>
+        </action>
+
+       <action
+            type="ps.edu.diyar.messaging.actions.ViewMsgDetailsAction"
+            path="/viewUserMessagesDetails">
+            <forward name="success" path="studentInfo.viewUserMessagesDetails.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.DeleteMsgAction"
+            path="/deleteMsg">
+            <forward name="success" path="/viewUserMessages.do"/>
+        </action>
+
+ 
+        <action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.DeleteSentMsgAction"
+            path="/deleteSentMsg">
+            <forward name="success" path="/viewSentMessages.do"/>
+        </action>
+        
+        <action
+            type="ps.edu.diyar.studentInfo.actions.StudMsCrsListAction"
+            path="/studMsCrsList">
+            <forward name="success" path="studentInfo.studMsCrsList.tile" contextRelative="true"/>
+            <forward name="failed" path="studentInfo.processResultPage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowStudTermScheduleAction"
+            path="/showStudTermSchedule">
+            <forward name="success" path="studentInfo.studTermSchedule.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            type="ps.edu.diyar.studentInfo.actions.ShowStudExamScheduleAction"
+            path="/showStudExamSchedule">
+            <forward name="success" path="studentInfo.studExamSchedule.tile" contextRelative="true"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.studentInfo.actions.ChangePasswordAction"
+            name="updatePasswordForm"
+            scope="request"
+            validate="false"
+            path="/changePassword">
+            <forward name="showPage" path="studentInfo.changePassword.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="updatePasswordForm"
+            type="ps.edu.diyar.studentInfo.actions.UpdatePasswordAction"
+            validate="true"
+            input="/changePassword.do"
+            scope="request"
+            path="/updateCmaPassword">
+            <forward name="success" path="studentInfo.processResultPage.tile" contextRelative="true"/>
+            <forward name="failed" path="/changePassword.do"/>
+        </action>
+
+
+        <action
+            path="/crsReg"
+            type="ps.edu.diyar.studentInfo.actions.CourseRegistrationAction">
+            <forward name="success" path="studentInfo.crsRegMain.tile" contextRelative="true"/>
+            <forward name="failed" path="studentInfo.processResultPage.tile" contextRelative="true"/>
+            <forward name="hours" path="studentInfo.numberOgRegisteredHours.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            path="/saveReg"
+            type="ps.edu.diyar.studentInfo.actions.RegStudCoursesAction">
+            <forward name="result" path="studentInfo.regProcessResultPage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/noJScript"
+            parameter="studentInfo.noJScript.tile"
+            />
+
+        <action
+            path="/delCrs"
+            type="ps.edu.diyar.studentInfo.actions.DeleteRegedCourseAction">
+            <forward name="result" path="/crsReg.do"/>
+        </action>
+
+        <action
+            name="studSocialSurveyForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSurveyAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSurvey">
+            <forward name="success" path="studentInfo.studSocialSurvey.tile" contextRelative="true"/>
+            <forward name="failed"  path="studentInfo.studSocialSurvey.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="studSocialSurveyForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSurveyAction"
+            validate="true"
+            input="studentInfo.studSocialSurvey.tile"
+            scope="request"
+            path="/saveStudSocialSurvey">
+            <forward name="success" path="/viewStudSocialSurvey.do"/>
+            <forward name="failed"  path="/viewStudSocialSurvey.do"/>
+        </action>
+
+        <action
+            name="studSocialSurveyAcadDtlForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSrvyAcadDtlAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSrvyAcadDtl">
+            <forward name="successP1" path="/pages/studentInfo/studSocialSrvAcadDtl.jsp"      contextRelative="true"/>
+            <forward name="failedP1"  path="/pages/studentInfo/studSocialSrvAcadDtl.jsp"      contextRelative="true"/>
+            <forward name="successP2" path="/pages/studentInfo/studSocialSrvAcadDtlPart2.jsp" contextRelative="true"/>
+            <forward name="failedP2"  path="/pages/studentInfo/studSocialSrvAcadDtlPart2.jsp" contextRelative="true"/>
+            <forward name="successP3" path="/pages/studentInfo/studSocialSrvAcadDtlPart3.jsp" contextRelative="true"/>
+            <forward name="failedP3"  path="/pages/studentInfo/studSocialSrvAcadDtlPart3.jsp" contextRelative="true"/>
+            <forward name="successP4" path="/pages/studentInfo/studSocialSrvAcadDtlPart4.jsp" contextRelative="true"/>
+            <forward name="failedP4"  path="/pages/studentInfo/studSocialSrvAcadDtlPart4.jsp" contextRelative="true"/>
+        </action>
+
+        <action
+            name="studSocialSurveyAcadDtlForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSrvyAcadDtlAction"
+            validate="true"
+            input="/viewStudSrvyAcadDtl.do"
+            scope="request"
+            path="/saveStudSrvyAcadDtl">
+            <forward name="successP1" path="/viewStudSrvyAcadDtl.do"                          contextRelative="true"/>
+            <forward name="failedP1"  path="/pages/studentInfo/studSocialSrvAcadDtl.jsp"      contextRelative="true"/>
+            <forward name="successP2" path="/viewStudSrvyAcadDtl.do"                          contextRelative="true"/>
+            <forward name="failedP2"  path="/pages/studentInfo/studSocialSrvAcadDtlPart2.jsp" contextRelative="true"/>
+            <forward name="successP3" path="/viewStudSrvyAcadDtl.do"                          contextRelative="true"/>
+            <forward name="failedP3"  path="/pages/studentInfo/studSocialSrvAcadDtlPart3.jsp" contextRelative="true"/>
+            <forward name="successP4" path="/viewStudSrvyAcadDtl.do"                          contextRelative="true"/>
+            <forward name="failedP4"  path="/pages/studentInfo/studSocialSrvAcadDtlPart4.jsp" contextRelative="true"/>
+        </action>
+
+       <action
+            name="srvyWorkDetailForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSrvWorkDtlInfoAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSrvWorkDtlInfo">
+           <forward name="success"   path="/pages/studentInfo/studSocialSrvWorkDtl.jsp"   contextRelative="true"/>
+           <forward name="successP2" path="/pages/studentInfo/studSocialSrvWorkDtlPart2.jsp"   contextRelative="true"/>
+           <forward name="successP3" path="/pages/studentInfo/studSocialSrvWorkDtlPart3.jsp"   contextRelative="true"/>
+           <forward name="successP4" path="/pages/studentInfo/studSocialSrvWorkDtlPart4.jsp"   contextRelative="true"/>
+         </action>
+
+        <action
+            name="srvyWorkDetailForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSrvWorkDtlInfoAction"
+            validate="false"
+            scope="request"
+            path="/saveStudSocialSrvWorkDtlInfo">
+            <forward name="success" path="/pages/studentInfo/studSocialSrvWorkDtl.jsp"   contextRelative="true"/>
+            <forward name="successP2" path="/pages/studentInfo/studSocialSrvWorkDtlPart2.jsp"   contextRelative="true"/>
+            <forward name="successP3" path="/pages/studentInfo/studSocialSrvWorkDtlPart3.jsp"   contextRelative="true"/>
+            <forward name="successP4" path="/pages/studentInfo/studSocialSrvWorkDtlPart4.jsp"   contextRelative="true"/>
+         </action>
+
+
+        <action
+            name="srvyWorkRelativeForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSrvWorkRelativeInfoAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSrvWorkRelativeInfo">
+            <forward name="success" path="/pages/studentInfo/studSocialSrvWorkRelative.jsp"   contextRelative="true"/>
+            <forward name="failed"  path="/pages/studentInfo/studSocialSrvWorkRelative.jsp"   contextRelative="true"/>
+        </action>
+
+        <action
+            name="srvyWorkRelativeForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSrvWorkRelativeInfoAction"
+            validate="true"
+            input="/viewStudSocialSrvWorkRelativeInfo.do"
+            scope="request"
+            path="/saveStudSocialSrvWorkRelativeInfo">
+            <forward name="success" path="/viewStudSocialSrvWorkRelativeInfo.do"    />
+            <forward name="failed"  path="/viewStudSocialSrvWorkRelativeInfo.do"    />
+        </action>
+
+
+        <action
+            name="srvyHealthDetailForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialHealthDetailAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialHealthDetail">
+            <forward name="success" path="/pages/studentInfo/studSocialHealthDetail.jsp"   contextRelative="true"/>
+            <forward name="failed"  path="/pages/studentInfo/studSocialHealthDetail.jsp"   contextRelative="true"/>
+        </action>
+
+        <action
+            name="srvyHealthDetailForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialHealthDetailAction"
+            validate="true"
+            input="/viewStudSocialHealthDetail.do"
+            scope="request"
+            path="/saveStudSocialHealthDetail">
+            <forward name="success" path="/viewStudSocialHealthDetail.do"    />
+            <forward name="failed"  path="/viewStudSocialHealthDetail.do"    />
+        </action>
+
+        <action
+            name="srvyHousingForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSrvHousingInfoAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSrvHousingInfo">
+            <forward name="success" path="/pages/studentInfo/studSocialHousingInfo.jsp"   contextRelative="true"/>
+            <forward name="failed"  path="/pages/studentInfo/studSocialHousingInfo.jsp"   contextRelative="true"/>
+        </action>
+
+        <action
+            name="srvyHousingForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSrvHousingInfoAction"
+            validate="true"
+            input="/viewStudSocialSrvHousingInfo.do"
+            scope="request"
+            path="/saveStudSocialHousingInfo">
+            <forward name="success" path="/viewStudSocialSrvHousingInfo.do"    />
+            <forward name="failed"  path="/viewStudSocialSrvHousingInfo.do"    />
+        </action>
+
+        <action
+            name="srvyLoanForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSrvLoanInfoAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSrvLoanInfo">
+            <forward name="success" path="/pages/studentInfo/studSocialLoanInfo.jsp"   contextRelative="true"/>
+            <forward name="failed"  path="/pages/studentInfo/studSocialLoanInfo.jsp"   contextRelative="true"/>
+        </action>
+
+        <action
+            name="srvyLoanForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSrvLoanInfoAction"
+            validate="true"
+            input="/viewStudSocialSrvLoanInfo.do"
+            scope="request"
+            path="/saveStudSocialLoanInfo">
+            <forward name="success" path="/viewStudSocialSrvLoanInfo.do"    />
+            <forward name="failed"  path="/viewStudSocialSrvLoanInfo.do"    />
+        </action>
+
+        <action
+            name="srvyStrategicForm"
+            type="ps.edu.diyar.studentInfo.actions.ViewStudSocialSrvStrategicInfoAction"
+            validate="false"
+            scope="request"
+            path="/viewStudSocialSrvStrategicInfo">
+            <forward name="success" path="/pages/studentInfo/studSocialStrategicInfo.jsp"   contextRelative="true"/>
+            <forward name="failed"  path="/pages/studentInfo/studSocialStrategicInfo.jsp"   contextRelative="true"/>
+        </action>
+
+        <action
+            name="srvyStrategicForm"
+            type="ps.edu.diyar.studentInfo.actions.SaveStudSocialSrvStrategicInfoAction"
+            validate="true"
+            input="/viewStudSocialSrvStrategicInfo.do"
+            scope="request"
+            path="/saveStudSocialStrategicInfo">
+            <forward name="success" path="/viewStudSocialSrvStrategicInfo.do"    />
+            <forward name="failed"  path="/viewStudSocialSrvStrategicInfo.do"    />
+        </action>
+
+    </action-mappings>
+
+    <!-- ========== Controller Configuration ================================ -->
+    <controller nocache="true" maxFileSize="1M"/>
+
+    <!-- ========== Message Resources Definitions ============================ -->
+    <message-resources parameter="ApplicationResources"/>
+
+    <!-- ========== Plug Ins Configuration ================================= -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tilesDef/tilesDef-student.xml" property="definitions-config"/>
+        <set-property value="true" property="moduleAware"/>
+        <set-property value="true" property="definitions-parser-validate"/>
+    </plug-in>
+</struts-config>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="basicLayout" path="/pages/layout/basicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="colgMaster.subHeader.tile"/>
+        <put name="leftMenuBar" value="varient"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/colgMaster/colgMasterHeader.jsp"/>
+    </definition>
+
+    <!-- ========= The definition of the wider layout ============================= -->
+    <definition name="widerLayout" path="/pages/layout/widerLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="colgMaster.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/colgMaster/colgMasterHeader.jsp"/>
+    </definition>
+
+      <!--============Main Defintion==================-->
+    <definition name="colgMaster.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+        <putList name="items">
+            <item value="الصفحة الرئيسية" link="/colgMstr/main.do"/>
+            <!--<item value="اتصل بنا " link="/tutor/contactUs.do"/>-->
+            <item value="خـــروج" link="/colgMstr/logout.do"/>
+        </putList>
+    </definition>
+
+      <!-- ========= The definition Student module with polls or setting menues ========== -->
+    <definition name="colgMasterMainLayout" extends="basicLayout">
+        <put name="rightMenuBar" value="colgMaster.rightMenu.all"/>
+    </definition>
+
+
+     <!-- ===  Right Menu def. for   module contains all sub menus ==== -->
+    <definition name="colgMaster.rightMenu.all" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/colgMaster/colgMasterMenu.jsp"/>
+            <add value="/pages/colgMaster/menu_setting.jsp"/>
+        </putList>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the   module ========== -->
+    <definition name="colgMaster.main.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.subMain.tile"/>
+        <put name="body" value="/pages/colgMaster/subMain.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="colgMaster.header.subMain.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+
+    <!-- ========= The definition of the send message Result Page in the tutor module ========== -->
+    <definition name="colgMaster.innerResultPage.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.innerResultPage.tile"/>
+        <put name="body" value="/pages/tutorInfo/senMessageResultPage.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.innerResultPage.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+    <!-- ========= The definition of the  colgList Page in the tutor module ========== -->
+    <definition name="colgMaster.colgList.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.colgList.tile"/>
+        <put name="body" value="/pages/colgMaster/colgList.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.colgList.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="قائمة الكليات"/>
+    </definition>
+
+    <!-- ========= The definition of the  tutorsDeptcolgList Page in the tutor module ========== -->
+    <definition name="colgMaster.tutorsDeptcolgList.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.tutorsDeptcolgList.tile"/>
+        <put name="body" value="/pages/colgMaster/tutorsDeptcolgList.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.tutorsDeptcolgList.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="قائمة اعضاء هيئة التدريس "/>
+    </definition>
+
+    <!-- ========= The definition of the  tutorsDeptcolgList Page in the tutor module ========== -->
+    <definition name="colgMaster.tutorsColgCrsList.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.tutorsColgCrsList.tile"/>
+        <put name="body" value="/pages/colgMaster/tutorsColgCrsList.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.tutorsColgCrsList.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="قائمة المقررات"/>
+    </definition>
+
+    <!-- ========= The definition of the  marksApproveDptColg Page in the tutor module ========== -->
+    <definition name="colgMaster.marksApproveDptColg.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.marksApproveDptColg.tile"/>
+        <put name="body" value="/pages/colgMaster/marksApproveDptColg.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.marksApproveDptColg.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="العلامات"/>
+    </definition>
+
+      <!-- ========= The definition of changePassword in   module ========== -->
+    <definition name="colgMaster.changePassword.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.changePassword.tile"/>
+        <put name="body" value="/pages/studentInfo/changePassword.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.changePassword.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value="تغيير كلمة المرور"/>
+    </definition>
+
+
+     <!-- ========= The definition of processResultPage in   module ========== -->
+    <definition name="colgMaster.processResultPage.tile" extends="colgMasterMainLayout">
+        <put name="header" value="colgMaster.header.processResultPage.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+    <definition name="colgMaster.header.processResultPage.tile" extends="colgMaster.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+
+    
+</tiles-definitions>

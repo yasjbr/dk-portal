@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+
+
+    <class
+    name="ps.edu.diyar.colgMaster.database.PrtlCollegeDeptsVw"
+    table="PRTL_COLLEGE_DEPTS_VW"
+>
+
+       <composite-id name="comp_id" class="ps.edu.diyar.colgMaster.database.PrtlCollegeDeptsVwPK">
+            <key-property name="deptNo"    column="DEPT_NO"    type="java.lang.String"/>
+            <key-property name="collegeNo" column="COLLEGE_NO" type="java.lang.String"/>
+        </composite-id>
+
+    <property
+        name="collegeDesc"
+        type="java.lang.String"
+        column="COLLEGE_DESC"
+        not-null="true"
+     />
+    
+    <property
+        name="deptDesc"
+        type="java.lang.String"
+        column="DEPT_DESC"
+        not-null="true"
+     />
+    <property
+        name="isActive"
+        type="java.lang.String"
+        column="IS_ACTIVE"
+        not-null="true"
+     />
+
+    <!-- associations -->
+
+</class>
+    <!-- *******************************************************************   -->
+    <class
+    name="ps.edu.diyar.colgMaster.database.PrtlDeanInfoVw" 
+    table="PRTL_DEAN_INFO_VW"
+>
+         <composite-id name="comp_id" class="ps.edu.diyar.colgMaster.database.PrtlDeanInfoVwPK">
+            <key-property name="empNo"     column="EMP_NO"     type="java.lang.String"/>
+            <key-property name="collegeNo" column="COLLEGE_NO" type="java.lang.String"/>
+        </composite-id>
+
+
+    <property
+        name="deanAName"
+        type="java.lang.String"
+        column="DEAN_A_NAME"
+     />
+    <property
+        name="deanLName"
+        type="java.lang.String"
+        column="DEAN_L_NAME"
+     />
+    <property
+        name="empType"
+        type="java.lang.String"
+        column="EMP_TYPE"
+        not-null="true"
+     />
+    <property
+        name="empTypeDesc"
+        type="java.lang.String"
+        column="EMP_TYPE_DESC"
+        not-null="true"
+     />
+    <property
+        name="jobType"
+        type="java.lang.String"
+        column="JOB_TYPE"
+        not-null="true"
+     />
+    <property
+        name="jobTypeDesc"
+        type="java.lang.String"
+        column="JOB_TYPE_DESC"
+        not-null="true"
+     />
+    <property
+        name="accRank"
+        type="java.lang.String"
+        column="ACC_RANK"
+     />
+    <property
+        name="accRankDesc"
+        type="java.lang.String"
+        column="ACC_RANK_DESC"
+        not-null="true"
+     />
+    <property
+        name="collegeDesc"
+        type="java.lang.String"
+        column="COLLEGE_DESC"
+        not-null="true"
+     />
+    <property
+        name="isActive"
+        type="java.lang.String"
+        column="IS_ACTIVE"
+        not-null="true"
+     />
+
+    <!-- associations -->
+
+</class>
+
+    <!--  **********************************************************************************************  -->
+
+
+</hibernate-mapping>

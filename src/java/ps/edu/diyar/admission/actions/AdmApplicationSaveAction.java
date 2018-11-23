@@ -1,0 +1,56 @@
+package ps.edu.diyar.admission.actions;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import ps.edu.diyar.admission.component.CommonOperationMessage;
+import ps.edu.diyar.admission.forms.AdmApplicationForm;
+import ps.edu.diyar.admission.useCase.AdmApplicationLoadDataUseCase;
+import ps.edu.diyar.admission.useCase.AdmApplicationLoadUseCase;
+import ps.edu.diyar.admission.useCase.AdmApplicationSaveUseCase;
+import ps.edu.diyar.common.tools.SessionTraker;
+
+public class AdmApplicationSaveAction
+  extends Action
+{
+  public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+    throws Exception
+  {
+    if (!SessionTraker.isUserAdmLogged(request)) {
+      return mapping.findForward("invalidAccess");
+    }
+    AdmApplicationForm admApplicationForm = (AdmApplicationForm)form;
+    
+    ArrayList input = new ArrayList();
+    input.add(admApplicationForm);
+    
+    Collection retList = new AdmApplicationSaveUseCase().execute(input, request);
+    if ((retList != null) && (retList.size() > 0))
+    {
+      CommonOperationMessage.saveFailed(request);
+      admApplicationForm.setEditOpperation(true);
+    }
+    else
+    {
+      CommonOperationMessage.saveSuccess(request);
+    }
+    admApplicationForm.setEditOpperation(true);
+    ArrayList inpt = new ArrayList();
+    inpt.add(form);
+    new AdmApplicationLoadUseCase().execute(inpt, request);
+    new AdmApplicationLoadDataUseCase().execute(null, request);
+    
+    return mapping.findForward("success");
+  }
+}
+
+
+/* Location:           C:\john_dreg\portal\diyar_portal.war\WEB-INF\classes\
+ * Qualified Name:     ps.edu.diyar.admission.actions.AdmApplicationSaveAction
+ * JD-Core Version:    0.7.0.1
+ */

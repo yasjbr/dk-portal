@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="basicLayout" path="/pages/layout/basicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College s– Academic Portal"/>
+        <put name="header" value="studentInfo.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+    </definition>
+    <definition name="topic.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="printBasicLayout" path="/pages/layout/outerLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="studentInfo.subHeader.print.tile"/>
+        <put name="body" value="variet"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+<!--        <put name="subHeader" value="varient"/>-->
+    </definition>
+
+    <definition name="adm.subHeader.print.tile" path="/pages/layout/printPageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+    <!--============Main Defintion==================-->
+    <definition name="adm.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+        <putList name="items">
+            <item value="خـــروج" link="/student/logout.do"/>
+        </putList>
+    </definition>
+
+     <!-- ========= The definition of the Admission module ========== -->
+    <definition name="admissionLayout" path="/pages/admission/admLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="/pages/admission/header.jsp"/>
+        <put name="body" value="variet"/>
+        <put name="footer" value="/pages/admission/footer.jsp"/>
+    </definition>
+
+      <!-- ========= The definition of the main page in admission module ========== -->
+    <definition name="adm.loginPage.tile" extends="admissionLayout">
+        <put name="body" value="/pages/admission/loginPage.jsp"/>
+    </definition>
+
+    <!-- ========= The definition  ======================= -->
+    <definition name="adm.application.tile" extends="admissionLayout">
+        <put name="body" value="/pages/admission/admissionApp.jsp"/>
+    </definition>
+
+     <!-- ========= The definition  ======================= -->
+    <definition name="adm.noJScript.tile" extends="admissionLayout">
+        <put name="body"   value="/pages/noJScriptPage.jsp"/>
+    </definition>
+
+</tiles-definitions>

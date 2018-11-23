@@ -1,0 +1,282 @@
+@charset "utf-8";
+/* CSS Document */
+.menuLinkHeader {
+     vertical-align:middle;
+     COLOR: #443b2e;
+     FONT-FAMILY: Tahoma;
+     height: 24px;
+     width: 160px;
+     TEXT-ALIGN: center;
+     FONT-SIZE: 12px;
+     FONT-STYLE: normal;
+     FONT-WEIGHT: bold;
+     background:url(/pages/resources/images/portalMenu/headMenu.png);
+     background-repeat: no-repeat;
+ }
+
+
+.menuLinkFooter {
+    width: 160px;
+    height: 24px;
+    background-image: url(/pages/resources/images/portalMenu/footerMenu.png);
+    background-repeat: no-repeat;
+}
+
+.subMenu {
+     FONT-FAMILY: Tahoma;
+     height: 20px;
+     width: 160px;
+     TEXT-ALIGN: center;
+     FONT-SIZE: 11px;
+     FONT-STYLE: normal;
+     FONT-WEIGHT: bold;
+     COLOR: #443b2e;
+     border: 1px solid #495e1b;
+     background-color: #f99f20;
+}
+
+
+.menuLink{
+border: 1px solid #fee6cb;
+background-color: white;
+border-bottom-width: 0;
+width: 170px;
+height: 15px;
+font-family: Simplified Arabic;
+font-size: 11px;
+
+}
+
+* html .menuLink{ /*IE only rule. Original menu width minus all left/right paddings */
+width: 164px;
+height: 15px;
+font-family: Simplified Arabic;
+font-size: 11px;
+
+background:#fab757;
+}
+
+.menuLink ul{
+padding: 0;
+margin: 0;
+list-style-type: none;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+height: 15px;
+}
+
+.menuLink a{
+font-family: Tahoma;
+font-size: 11px;
+
+height: 15px;
+padding: 4px 3px;
+display: block;
+width: 100%; /*Define width for IE6's sake*/
+color: #443b2e;
+text-decoration: none;
+border-bottom: 1px solid #fee6cb;
+background:#fab757;
+}
+
+.menuLink a:visited{
+color: #443b2e;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+height: 15px;
+}
+
+html>body .menuLink a{ /*Non IE rule*/
+width: auto;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+height: 15px;
+}
+
+.menuLink a:hover{
+background-color: #fcdfbe;
+color: #991611;
+font-family: Tahoma;
+font-size: 11px;
+
+height: 15px;
+}
+
+
+.menuLinkBig{
+border: 1px solid #fee6cb;
+background-color: white;
+border-bottom-width: 0;
+width: 170px;
+font-family: Tahoma;
+font-size: 11px;
+
+}
+
+* html .menuLinkBig{ /*IE only rule. Original menu width minus all left/right paddings */
+width: 164px;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+}
+
+.menuLinkBig ul{
+padding: 0;
+margin: 0;
+list-style-type: none;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+}
+
+.menuLinkBig a{
+font-family: Tahoma;
+font-size: 11px;
+
+padding: 4px 3px;
+display: block;
+width: 100%; /*Define width for IE6's sake*/
+color: #ffffff;
+text-decoration: none;
+border-bottom: 1px solid #fee6cb;
+background:#fab757;
+}
+
+.menuLinkBig a:visited{
+color: #ffffff;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+}
+
+html>body .menuLinkBig a{ /*Non IE rule*/
+width: auto;
+font-family: Tahoma;
+font-size: 11px;
+
+background:#fab757;
+}
+
+.menuLinkBig a:hover{
+background-color: #F8FBBD;
+color: #E67E0B;
+font-family: Tahoma;
+font-size: 11px;
+
+}
+
+
+/*-------------------------------------------*/
+
+
+.glossymenu{
+margin: 5px 0;
+padding: 0;
+width: 160px; /*width of menu*/
+height: 24px;
+border: 0px solid;
+border-bottom-width: 0;
+}
+
+.glossymenu a.menuitem{
+background:url(/pages/resources/images/portalMenu/headMenu2.png);
+/*background-repeat: no-repeat;    */
+/*margin-left:2;*/
+vertical-align:middle;
+FONT-FAMILY: Tahoma;
+FONT-SIZE: 11px;
+FONT-WEIGHT: bold;
+color:#ffffff;
+display: block;
+position: relative; /*To help in the anchoring of the ".statusicon" icon image*/
+height: 15px;
+width: 160px;
+padding: 4px 0;
+/*padding-right: 23px;*/
+text-decoration: none;
+/*border: 1px solid #ffffff;*/
+BORDER-BOTTOM: #ffffff 1px solid;
+TEXT-ALIGN: center;
+
+}
+
+
+.glossymenu a.menuitem:visited, .glossymenu .menuitem:active{
+    /*background:url(/pages/resources/images/portalMenu/headMenu_2.png);*/
+color: #ffffff;
+}
+
+.glossymenu a.menuitem .statusicon{ /*CSS for icon image that gets dynamically added to headers*/
+position: absolute;
+top: 5px;
+right: 140px;
+border: none;
+
+}
+
+.glossymenu a.menuitem:hover{
+/*margin-left:2;*/
+background:url(/pages/resources/images/portalMenu/headMenuE.png);
+FONT-FAMILY:  Tahoma;
+FONT-SIZE: 11px;
+FONT-WEIGHT: bold;
+TEXT-ALIGN: center;
+color: #3f4e18;
+}
+
+.glossymenu div.sub_menu{ /*DIV that contains each sub menu*/
+background: none;
+}
+
+.glossymenu div.sub_menu ul{ /*UL of each sub menu*/
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+.glossymenu div.sub_menu ul li{
+border-bottom: 1px solid #fee6cb;
+background-color: #fab757;
+}
+
+.glossymenu div.sub_menu ul li a{
+display: block;
+FONT-FAMILY:  Tahoma;
+FONT-SIZE: 11px;
+FONT-WEIGHT: normal;
+TEXT-ALIGN: right;
+color: #ffffff;
+text-decoration: none;
+padding: 4px 0;
+padding-right: 3px;
+/*width: 160px; *//*Define width for IE6's sake*/
+
+}
+
+.glossymenu div.sub_menu ul li a:hover{
+FONT-FAMILY:  Tahoma;
+FONT-SIZE: 11px;
+FONT-WEIGHT: normal;
+TEXT-ALIGN: right;
+color: #E67E0B;
+background-color: #F8FBBD;
+padding: 4px 0;
+padding-right: 3px;
+
+}
+
+
+
+
+
+
+

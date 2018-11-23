@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+ PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+ "http://localhost:8080/dtd/web-jsptaglibrary_1_2.dtd">
+
+<!-- a tab library descriptor -->
+
+<taglib>
+    <!-- after this the default space is
+          "http://java.sun.com/j2ee/dtds/jsptaglibrary_1_2.dtd"
+     -->
+
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.2</jspversion>
+    <shortname>TaglibExample</shortname>
+
+    <info>
+    A tag library for Al-Quds Open Unversity
+    </info>
+
+   
+
+
+
+
+    <!-- tag used to check the session and validate user access -->
+    <tag>
+        <name>SessionValidator</name>
+        <tagclass>edu.qou.taglibs.SessionValidator</tagclass>
+      
+        <bodycontent>JSP</bodycontent>
+     <!--    <info>Check if the user is logged in and there is a valid session</info> -->
+    </tag>
+
+    <!-- tag used to generate the "next previous" link for term navigation -->
+    <tag>
+        <name>TermListNavigator</name>
+        <tagclass>ps.edu.diyar.taglibs.TermsListNavigator</tagclass>
+        <bodycontent>JSP</bodycontent>
+        <info>Check if the user is logged in and there is a valid session</info>
+        <attribute>
+            <name>pageType</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <!-- tag used toTo Return the value of the current date -->
+    <tag>
+        <name>CurrentDateViewer</name>
+        <tagclass>ps.edu.diyar.taglibs.CurrentDateViewer</tagclass>
+        <bodycontent>JSP</bodycontent>
+        <info>To Return the value of the current date</info>
+    </tag>
+
+    <!-- added by mureed 5/9/2005-->
+    <!-- tag used to view student list in insertion marks page -->
+    <tag>
+        <name>StudentMarks</name>
+        <tagclass>edu.qou.taglibs.StudentMarks</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>To view list of student marks in tutor class  to update marks</info>
+        <attribute>
+            <name>readOnlyStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>activeStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>relatedCalender</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <name>outlookMenu</name>
+        <tagclass>edu.qou.taglibs.OutlookMenuTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>To view any no of groups in outlook menu style</info>
+
+        <attribute>
+            <name>dataSource</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>imagePath</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>itemImageWidth</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>itemImageHeight</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>panelStyleClass</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>itemStyleClass</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>linkStyleClass</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>viewablePanel</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>panelGroundColor</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>panelOverGroundColor</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>panelGroundPic</name>
+            <required>false</required>
+        </attribute>
+
+        <attribute>
+            <name>emptyData</name>
+            <required>false</required>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <name>qouForumLink</name>
+        <tagclass>edu.qou.taglibs.QouForumAdminTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>To view any no of groups in outlook menu style</info>
+
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>objectType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>href</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>target</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>styleClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>text</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>actionName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>emptyDataMassage</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>viewText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>permissionType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>title</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>prefText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>suftext</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>relatedToClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>relatedToCourse</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>headLine</name>
+        <tagclass>edu.qou.taglibs.ForumHeadLineTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <attribute>
+            <name>bundle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>filter</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>format</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>formatKey</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>ignore</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>locale</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>property</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>length</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>lookupInfo</name>
+        <tagclass>edu.qou.taglibs.LookupInfoTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>To Get the lookup Info</info>
+
+        <attribute>
+            <name>lookupId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>lookupValue</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>lang</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>TrainingQuestionsInfoTag</name>
+        <tagclass>edu.qou.taglibs.TrainingQuestionsInfoTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>To Training info and related question of the training</info>
+        <attribute>
+            <name>trainingId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>userId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>textStyle</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>smallInputStyle</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>largInputStyle</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>totalTrainingNumber</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>trainingSequence</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>activityId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>answerCount</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

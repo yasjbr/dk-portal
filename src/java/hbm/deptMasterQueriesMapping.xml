@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+     <query
+        name="deptMstr.getDeptMasterInfo">
+        <![CDATA[
+                  select new ps.edu.diyar.deptMaster.database.struct.DeptMasterInfoHolder
+                  (a.comp_id.empNo,a.comp_id.deptNo,a.empAName,a.accRank,a.accRankDesc,a.deptDesc,a.hasClass)
+                  from ps.edu.diyar.deptMaster.database.PrtlDeptMasterInfoVw a
+                  where
+                      a.comp_id.empNo= ?   
+                      order by a.comp_id.empNo
+             ]]>
+    </query>
+
+     <query
+        name="dptMstr.getTutorsDeptList">
+        <![CDATA[
+                   select new ps.edu.diyar.common.struct.LabelValue
+                   (a.tutorAName,a.empNo)
+                   from ps.edu.diyar.tutorInfo.database.PrtlTutorInfoVw a
+                  where
+                      a.deptNo= ?
+                     and a.hasClass='T'
+                      order by a.tutorAName
+             ]]>
+    </query>
+
+     <query
+        name="dptMstr.getTutCrsList">
+        <![CDATA[
+                 select new  ps.edu.diyar.tutorInfo.database.struct.TutorTermScheduleDataHolder
+               (b.crsNo ,b.crsAName ,a.comp_id.classNo,b.crHrs,a.classReg, a.comp_id.termNo)
+               from
+                    ps.edu.diyar.studentInfo.database.RegClass a,
+                    ps.edu.diyar.studentInfo.database.RegCourse b,
+                    ps.edu.diyar.tutorInfo.database.PrtlTutorInfoVw c
+
+               where
+                    a.comp_id.termNo=?
+                    and a.tutorNo=?
+                    and c.deptNo=?
+                    and a.tutorNo=c.empNo
+                    and a.comp_id.crsNo=b.crsNo
+
+
+                    order by b.crsNo
+             ]]>
+    </query>
+
+    <query
+        name="dptMstr.getRegStudListDept">
+        <![CDATA[
+                   from ps.edu.diyar.studentInfo.database.PrtlRegStudListDeptVw a
+                  where
+                           a.comp_id.termNo= ?
+                       and a.deptNo= ?
+                      order by a.majorSheetNo,a.comp_id.studId,a.studName,a.ipApprove,a.rpApprove
+             ]]>
+    </query>
+
+    <query
+        name="dptMstr.getStudNotRegListDept">
+        <![CDATA[
+                   from ps.edu.diyar.deptMaster.database.PrtlStudNotRegVw a
+                  where
+                        a.deptNo= ?
+                      order by a.majorSheetNo
+             ]]>
+    </query>
+
+</hibernate-mapping>

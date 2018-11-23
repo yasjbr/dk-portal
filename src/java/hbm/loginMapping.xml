@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+
+    <class
+            name="ps.edu.diyar.login.database.PrtlSecUser"
+            table="PRTL_SEC_USERS"
+            >
+        <id
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="userPwd"
+                type="java.lang.String"
+                column="USER_PWD"
+                />
+        <property
+                name="status"
+                type="java.lang.String"
+                column="STATUS"
+                />
+        <property
+                name="roleid"
+                type="java.lang.Integer"
+                column="ROLEID"
+                />
+        <property
+                name="email"
+                type="java.lang.String"
+                column="EMAIL"
+                />
+        <property
+                name="screenName"
+                type="java.lang.String"
+                column="SCREEN_NAME"
+                />
+        <property
+                name="lastVisitDate"
+                type="java.util.Date"
+                column="LAST_VISIT_DATE"
+                />
+        <property
+                name="creationDate"
+                type="java.util.Date"
+                column="CREATION_DATE"
+                />
+        <property
+                name="mobile"
+                type="java.lang.String"
+                column="MOBILE"
+                />
+        <property
+                name="smsReg"
+                type="java.lang.String"
+                column="SMS_REG"
+                />
+        <property
+                name="pwdSource"
+                type="java.lang.String"
+                column="PWD_SOURCE"
+                />
+        <property
+                name="pwdLastChange"
+                type="java.util.Date"
+                column="PWD_LAST_CHANGE"
+                />
+    </class>
+    <!-- *******************************************************************   -->
+
+    <class
+            name="ps.edu.diyar.login.database.PrtlSecRoles"
+            table="PRTL_SEC_ROLES"
+            >
+        <id
+                name="roleid"
+                type="java.lang.Integer"
+                column="ROLEID"
+                >
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="rolename"
+                type="java.lang.String"
+                column="ROLENAME"
+                />
+        <property
+                name="roleADesc"
+                type="java.lang.String"
+                column="ROLE_A_DESC"
+                />
+        <property
+                name="roleLDesc"
+                type="java.lang.String"
+                column="ROLE_L_DESC"
+                />
+        <property
+                name="roleStatus"
+                type="java.lang.String"
+                column="ROLE_STATUS"
+                not-null="true"
+                />
+        <property
+                name="roleCat"
+                type="java.lang.String"
+                column="ROLE_CAT"
+                not-null="true"
+                />
+    </class>
+
+    <!--  **********************************************************************************************  -->
+
+
+</hibernate-mapping>

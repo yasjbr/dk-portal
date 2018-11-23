@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <!-- ========== Form Bean Definitions ================================== -->
+
+    <form-beans>
+          <form-bean name="marksInsertionForm" type="ps.edu.diyar.tutorInfo.forms.MarksInsertionForm"/>
+          <form-bean name="updatePasswordForm" type="ps.edu.diyar.studentInfo.forms.UpdatePasswordForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="null.error" type="java.lang.NullPointerException" path="/errorPageAction.do"/>
+    </global-exceptions>
+
+    <!-- ========== Global Forward Definitions =============================== -->
+
+    <global-forwards>
+        <forward name="logout" path="/logout.do"/>
+         <forward name="invalidAccess" path="/invalidAccess.do" />
+    </global-forwards>
+
+
+    <!-- ========== Action Mapping Definitions =============================== -->
+
+    <action-mappings>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/errorPageAction"
+            parameter="/pages/invalidPage.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.common.actions.InvalidAccessAction"
+            path="/invalidAccess">
+            <forward name="success" path="/logout.do"/>
+        </action>
+        
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/pages/drPortalIndex.jsp"
+            path="/diyarLogin"/>
+
+        <action
+            type="ps.edu.diyar.logout.actions.LogoutAction"
+            path="/logout">
+            <forward name="logoutDone" path="/diyarLogin.do"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/main"
+            parameter="/pages/colgMaster/main.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.colgMaster.actions.MainPageAction"
+            path="/colgMasterMain">
+            <forward name="mainPage" path="colgMaster.main.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.colgMaster.actions.ColgListAction"
+            path="/colgList">
+            <forward name="success" path="colgMaster.colgList.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.TutorsDeptListAction"
+            path="/tutorsDeptcolgList">
+            <forward name="success" path="colgMaster.tutorsDeptcolgList.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.TutCrsListAction"
+            path="/tutorsColgCrsList">
+            <forward name="success" path="colgMaster.tutorsColgCrsList.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.MarksApprovePageAction"
+            path="/marksApproveDptColg"
+            name="marksInsertionForm"
+            scope="request"
+            >
+            <forward name="success"  path="colgMaster.marksApproveDptColg.tile" contextRelative="true"/>
+            <forward name="approved" path="colgMaster.marksApproveDptColg.tile" contextRelative="true"/>
+        </action>
+
+
+          <action
+            type="ps.edu.diyar.studentInfo.actions.ChangePasswordAction"
+            name="updatePasswordForm"
+            scope="request"
+            validate="false"
+            path="/changePassword">
+            <forward name="showPage" path="colgMaster.changePassword.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="updatePasswordForm"
+            type="ps.edu.diyar.studentInfo.actions.UpdatePasswordAction"
+            validate="true"
+            input="/changePassword.do"
+            scope="request"
+            path="/updateCmaPassword">
+            <forward name="success" path="colgMaster.processResultPage.tile" contextRelative="true"/>
+            <forward name="failed" path="/changePassword.do"/>
+        </action>
+
+    </action-mappings>
+
+    <!-- ========== Controller Configuration ================================ -->
+    <controller nocache="true" maxFileSize="1M"/>
+
+    <!-- ========== Message Resources Definitions ============================ -->
+    <message-resources parameter="ApplicationResources"/>
+
+    <!-- ========== Plug Ins Configuration ================================= -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tilesDef/tilesDef-colgMaster.xml" property="definitions-config"/>
+        <set-property value="true" property="moduleAware"/>
+        <set-property value="true" property="definitions-parser-validate"/>
+    </plug-in>
+</struts-config>

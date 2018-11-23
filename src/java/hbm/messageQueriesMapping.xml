@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query
+        name="msg.getNotifications">
+        <![CDATA[
+               from  ps.edu.diyar.messaging.database.PrtlNotifications a 
+                  
+                 
+             ]]>
+    </query>
+    
+
+     <query
+        name="msg.getInboxMsg">
+        <![CDATA[
+              select new ps.edu.diyar.messaging.database.struct.PrtlMessage
+              (a.comp_id.msgId,a.viewed,a.comp_id.senderId,a.senderName,a.msgTitle,a.msgDate,a.servirity,a.recipientName,a.recipientId)
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a 
+
+                where
+                a.recipientDeleted !='T'
+                 and     a.recipientId=?
+                 and  a.crsNo=?
+                 and  a.classNo=?
+                 and  a.termNo=?
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+
+
+     <query
+        name="msg.getInboxMsgCount">
+        <![CDATA[
+              select count(a.comp_id.msgId)
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a  
+               where
+                a.recipientDeleted !='T'
+                 and     a.recipientId=?
+                 and  a.crsNo=?
+                 and  a.classNo=?
+                 and  a.termNo=?
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+
+     <query
+        name="msg.getUnreadInboxMsgCount">
+        <![CDATA[
+              select count(a.comp_id.msgId)
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a
+               where
+                a.recipientDeleted !='T'
+                 and     a.recipientId=?
+                 and  a.termNo=?
+                 and  a.viewed='F'
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+
+     <query
+        name="msg.getMsgDetails">
+        <![CDATA[
+
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a
+                where
+                         a.comp_id.msgId=?
+                     and a.comp_id.senderId=?
+                order by  a.comp_id.msgId
+             ]]>
+    </query>
+
+    <query
+        name="msg.getMessageDetail">
+        <![CDATA[
+
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a
+                where
+                         a.comp_id.msgId=?
+                order by  a.comp_id.msgId
+             ]]>
+    </query>
+
+    <query
+        name="msg.getMessageAtt">
+        <![CDATA[
+
+              from  ps.edu.diyar.messaging.database.PrtlMessageAttachment a
+                where
+                              a.comp_id.msgId=?
+                         and  a.seed=?
+                order by  a.seed
+             ]]>
+    </query>
+
+ <query
+        name="msg.getOutboxMsg">
+        <![CDATA[
+              select new ps.edu.diyar.messaging.database.struct.PrtlMessage
+             (a.comp_id.msgId,a.viewed,a.comp_id.senderId,a.senderName,a.msgTitle,a.msgDate,a.servirity,a.recipientName,a.recipientId)
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a 
+
+                where
+                  
+                a.senderDeleted !='T'
+                  and     a.comp_id.senderId=?
+                 and  a.crsNo=?
+                 and  a.classNo=?
+                 and  a.termNo=?
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+<query
+        name="msg.getMsgRecipients">
+        <![CDATA[
+               select new ps.edu.diyar.messaging.database.struct.PrtlMessage
+              (a.comp_id.msgId,a.viewed,a.comp_id.senderId,a.senderName,a.msgTitle,a.msgDate,a.servirity,a.recipientName,a.recipientId)
+               from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a 
+
+                where
+                  
+                     a.comp_id.msgId=?
+                  
+
+                  order by  a.recipientName
+             ]]>
+    </query>
+
+ <query
+        name="msg.getTutorOutboxMsg">
+        <![CDATA[
+         select new ps.edu.diyar.messaging.database.struct.PrtlTutorMessage
+             (a.comp_id.msgId,a.comp_id.senderId,a.senderName,a.msgTitle,a.msgDate,a.servirity )
+                from  ps.edu.diyar.messaging.database.PrtlMsgTutorInfoVw a 
+
+                where
+                  
+                a.senderDeleted !='T'
+                  and     a.comp_id.senderId=?
+                 and  a.crsNo=?
+                 and  a.classNo=?
+                 and  a.termNo=?
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+    
+     <query
+        name="msg.getOutbokMsgCount">
+        <![CDATA[
+              select count(a.comp_id.msgId)
+              from  ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw a  
+                where
+                 a.senderDeleted !='T'
+                  and    a.comp_id.senderId=? 
+                 and  a.crsNo=?
+                 and  a.classNo=?
+                 and  a.termNo=?
+
+                  order by  a.msgDate
+             ]]>
+    </query>
+
+
+</hibernate-mapping>

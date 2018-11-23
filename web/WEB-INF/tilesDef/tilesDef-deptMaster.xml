@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+    
+    
+        <definition name="studentInfo.termSummary.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.subHeader.tile"/>
+        <put name="body" value="/pages/deptMaster/studTermSummary.jsp"/>
+       </definition>
+    
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="basicLayout" path="/pages/layout/basicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="deptMaster.subHeader.tile"/>
+        <put name="leftMenuBar" value="varient"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/deptMaster/deptMasterHeader.jsp"/>
+    </definition>
+
+    <!-- ========= The definition of the wider layout ============================= -->
+    <definition name="widerLayout" path="/pages/layout/widerLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="deptMaster.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/deptMaster/deptMasterHeader.jsp"/>
+    </definition>
+
+      <!--============Main Defintion==================-->
+    <definition name="deptMaster.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+        <putList name="items">
+            <item value="الصفحة الرئيسية" link="/deptMstr/main.do"/>
+            <!--<item value="اتصل بنا " link="/tutor/contactUs.do"/>-->
+            <item value="خـــروج" link="/deptMstr/logout.do"/>
+        </putList>
+    </definition>
+
+      <!-- ========= The definition Student module with polls or setting menues ========== -->
+    <definition name="deptMasterMainLayout" extends="basicLayout">
+        <put name="rightMenuBar" value="deptMaster.rightMenu.all"/>
+    </definition>
+
+
+     <!-- ===  Right Menu def. for   module contains all sub menus ==== -->
+    <definition name="deptMaster.rightMenu.all" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/deptMaster/deptMasterMenu.jsp"/>
+            <add value="/pages/deptMaster/menu_setting.jsp"/>
+        </putList>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the   module ========== -->
+    <definition name="deptMaster.main.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.subMain.tile"/>
+        <put name="body" value="/pages/deptMaster/subMain.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="deptMaster.header.subMain.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+
+    <!-- ========= The definition of the send message Result Page in the tutor module ========== -->
+    <definition name="deptMaster.innerResultPage.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.innerResultPage.tile"/>
+        <put name="body" value="/pages/tutorInfo/senMessageResultPage.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.innerResultPage.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+    <!-- ========= The definition of the tutorsDeptList page in the   module ========== -->
+    <definition name="deptMaster.tutorsDeptList.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.tutorsDeptList.tile"/>
+        <put name="body" value="/pages/deptMaster/tutorsDeptList.jsp"/>
+    </definition>
+    
+ <definition name="dept.schedule.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.tutorsDeptList.tile"/>
+        <put name="body" value="/pages/deptMaster/deptTutorSchedule.jsp"/>
+    </definition>
+    
+    
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="deptMaster.header.tutorsDeptList.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="اعضاء هيئة التدريس"/>
+    </definition>
+
+    <!-- ========= The definition of the tutCrsList page in the   module ========== -->
+    <definition name="deptMaster.tutCrsList.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.tutCrsList.tile"/>
+        <put name="body" value="/pages/deptMaster/tutCrsList.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="deptMaster.header.tutCrsList.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="المقررات"/>
+    </definition>
+
+    <!-- ========= The definition of the marksApprove page in the   module ========== -->
+    <definition name="deptMaster.marksApprove.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.marksApprove.tile"/>
+        <put name="body" value="/pages/deptMaster/marksApprove.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="deptMaster.header.marksApprove.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="العلامات"/>
+    </definition>
+
+     <!-- ========= The definition of changePassword in   module ========== -->
+    <definition name="deptMaster.changePassword.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.changePassword.tile"/>
+        <put name="body" value="/pages/studentInfo/changePassword.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.changePassword.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="تغيير كلمة المرور"/>
+    </definition>
+
+
+     <!-- ========= The definition of processResultPage in   module ========== -->
+    <definition name="deptMaster.processResultPage.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.processResultPage.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.processResultPage.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+    <!-- ========= The definition of processResultPage in   module ========== -->
+   <definition name="deptMaster.loadStudentRegCrsInfo.tile" extends="deptMasterMainLayout">
+       <put name="header" value="deptMaster.header.loadStudentRegCrsInfo.tile"/>
+       <put name="body" value="/pages/deptMaster/loadStudentRegCrsInfo.jsp"/>
+   </definition>
+   <definition name="deptMaster.header.loadStudentRegCrsInfo.tile" extends="deptMaster.subHeader.tile">
+       <put name="subtitle" value="تحميل بيانات التسجيل لطالب"/>
+   </definition>
+
+      <!-- ========= The definition of crsRegMain in   module ========== -->
+    <definition name="deptMaster.crsRegMain.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.crsRegMain.tile"/>
+        <put name="body" value="/pages/studentInfo/crsRegMain.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.crsRegMain.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="التسجيل و السحب و الاضافة"/>
+    </definition>
+
+  <!-- ========= The definition of noJScript in   module ========== -->
+    <definition name="deptMaster.noJScript.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.noJScript.crsRegMain.tile"/>
+        <put name="body" value="/pages/noJScriptPage.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.noJScript.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value="noJScript"/>
+    </definition>
+
+     <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="deptMaster.regProcessResultPage.tile" extends="deptMasterMainLayout">
+        <put name="header" value="deptMaster.header.regProcessResultPage.tile"/>
+        <put name="body" value="/pages/studentInfo/regProcessResultPage.jsp"/>
+    </definition>
+    <definition name="deptMaster.header.regProcessResultPage.tile" extends="deptMaster.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+
+    <!-- ========= The definition of deptMaster.viewRegStudListDept.tile in   module ========== -->
+   <definition name="deptMaster.viewRegStudListDept.tile" extends="deptMasterMainLayout">
+       <put name="header" value="deptMaster.header.viewRegStudListDept.tile"/>
+       <put name="body" value="/pages/deptMaster/viewRegStudListDept.jsp"/>
+   </definition>
+   <definition name="deptMaster.header.viewRegStudListDept.tile" extends="deptMaster.subHeader.tile">
+       <put name="subtitle" value="الطلاب المسجلين"/>
+   </definition>
+
+    <!-- ========= The definition of deptMaster.studMsCrsInDptList.tile in   module ========== -->
+   <definition name="deptMaster.studMsCrsInDptList.tile" extends="deptMasterMainLayout">
+       <put name="header" value="deptMaster.header.studMsCrsInDptList.tile"/>
+       <put name="body" value="/pages/deptMaster/studMsCrsInDptList.jsp"/>
+   </definition>
+   <definition name="deptMaster.header.studMsCrsInDptList.tile" extends="deptMaster.subHeader.tile">
+       <put name="subtitle" value="الخطة الاسترشادية "/>
+   </definition>
+
+    <!-- ========= The definition of deptMaster.viewStudNotRegListDept.tile in   module ========== -->
+   <definition name="deptMaster.viewStudNotRegListDept.tile" extends="deptMasterMainLayout">
+       <put name="header" value="deptMaster.header.viewStudNotRegListDept.tile"/>
+       <put name="body" value="/pages/deptMaster/viewStudNotRegListDept.jsp"/>
+   </definition>
+   <definition name="deptMaster.header.viewStudNotRegListDept.tile" extends="deptMaster.subHeader.tile">
+       <put name="subtitle" value="الطلاب الغير المسجلين"/>
+   </definition>
+
+
+
+
+    
+    
+    
+</tiles-definitions>
+
+
+

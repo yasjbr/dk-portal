@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <!-- ========== Form Bean Definitions ================================== -->
+
+    <form-beans>
+
+       <form-bean name="loginForm"     type="ps.edu.diyar.login.forms.LoginForm"/>
+       <form-bean name="createMsgForm" type="ps.edu.diyar.messaging.forms.CreateMsgForm"/>
+       <form-bean name="sendTutorMessageForm" type="ps.edu.diyar.messaging.forms.SendTutorMessageForm"/>
+       <form-bean name="marksInsertionForm" type="ps.edu.diyar.tutorInfo.forms.MarksInsertionForm"/>
+       <form-bean name="updatePasswordForm" type="ps.edu.diyar.studentInfo.forms.UpdatePasswordForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="null.error" type="java.lang.NullPointerException" path="/errorPageAction.do"/>
+    </global-exceptions>
+
+    <!-- ========== Global Forward Definitions =============================== -->
+
+    <global-forwards>
+        <forward name="logout" path="/logout.do"/>
+         <forward name="invalidAccess" path="/invalidAccess.do" />
+    </global-forwards>
+
+
+    <!-- ========== Action Mapping Definitions =============================== -->
+
+    <action-mappings>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/errorPageAction"
+            parameter="/pages/invalidPage.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.common.actions.InvalidAccessAction"
+            path="/invalidAccess">
+            <forward name="success" path="/logout.do"/>
+        </action>
+        
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/pages/drPortalIndex.jsp"
+            path="/diyarLogin"/>
+
+        <action
+            type="ps.edu.diyar.logout.actions.LogoutAction"
+            path="/logout">
+            <forward name="logoutDone" path="/diyarLogin.do"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/main"
+            parameter="/pages/tutorInfo/main.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.tutorInfo.actions.MainPageAction"
+            path="/tutorMain">
+            <forward name="mainPage" path="tutorInfo.main.tile"  contextRelative="true"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.tutorInfo.actions.TutorTermScheduleAction"
+            path="/showTutorTermSchedule">
+            <forward name="success" path="tutorInfo.schedule.tile" contextRelative="true"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.tutorInfo.actions.TutorTermScheduleAction"
+            path="/showMessages">
+            <forward name="success" path="tutorInfo.showMessages.tile" contextRelative="true"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.tutorInfo.actions.ShowMarkInsertionAction"
+            path="/showMarkInsertion">
+            <forward name="success" path="tutorInfo.showMarkInsertion.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.messaging.actions.ViewAllMsgAction"
+            path="/viewUserMessages">
+            <forward name="success" path="tutorInfo.viewUserMessages.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.messaging.actions.ViewMsgDetailsAction"
+            path="/viewUserMessagesDetails">
+            <forward name="success" path="tutorInfo.viewUserMessagesDetails.tile" contextRelative="true"/>
+        </action>
+         
+         
+          <action
+            type="ps.edu.diyar.messaging.actions.ViewMsgRecipientsAction"
+            path="/ViewMsgRecipients">
+            <forward name="success" path="/pages/tutorInfo/RecipientsList.jsp" contextRelative="true"/>
+        </action>
+          <action
+                type="ps.edu.diyar.messaging.actions.ViewSentMsgAction"
+                path="/viewSentMessages">
+                <forward name="success" path="tutorInfo.viewUserSentMessages.tile" contextRelative="true"/>
+            </action>             
+
+          <action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.DeleteMsgAction"
+            path="/deleteMsg">
+            <forward name="success" path="/viewUserMessages.do"/>
+        </action>
+
+
+<action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.DeleteSentMsgAction"
+            path="/deleteSentMsg">
+            <forward name="success" path="/viewSentMessages.do"/>
+        </action>
+        
+         <action
+            name="createMsgForm"
+            validate="false"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.CreateMsgAction"
+            path="/createUserMessages">
+            <forward name="showPage" path="tutorInfo.createUserMessages.tile" contextRelative="true"/>
+        </action>
+
+         <action
+            name="createMsgForm"
+            validate="true"
+            input="/createUserMessages.do"
+            scope="request"
+            type="ps.edu.diyar.messaging.actions.SendMsgAction"
+            path="/sendUserMessages">
+            <forward name="success" path="tutorInfo.processResult.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            type="ps.edu.diyar.messaging.actions.ViewTutorMessageAction"
+            path="/viewTutorMessageAction">
+            <forward name="success" path="tutorInfo.sendTutorMessage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="sendTutorMessageForm"
+            type="ps.edu.diyar.messaging.actions.SendTutorMessageAction"
+            path="/sendTutorMessageAction"
+            scope="request"
+            validate="true"
+            input="tutorInfo.sendTutorMessage.tile">
+            <forward name="success" path="tutorInfo.sendTutorMessage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.tutorInfo.actions.MarksInsertionPageAction"
+            path="/viewMarksInsertion"
+            name="marksInsertionForm"
+            scope="request"
+            >
+            <forward name="success" path="tutorInfo.marksInsertion.tile" contextRelative="true"/>
+            <forward name="approved" path="tutorInfo.marksInsertion.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            name="marksInsertionForm"
+            type="ps.edu.diyar.tutorInfo.actions.MarkInsertionCheckAction"
+            input="tutorInfo.marksInsertion.tile"
+            path="/insertedMarksCheck"
+            scope="request"
+            >
+            <forward name="errors" path="tutorInfo.marksInsertion.tile" contextRelative="true"/>
+            <forward name="success" path="/viewMarksInsertion.do" />
+            <forward name="saveData" path="tutorInfo.innerResultPage.tile" contextRelative="true"/>
+        </action>
+
+       <action
+            type="ps.edu.diyar.studentInfo.actions.ChangePasswordAction"
+            name="updatePasswordForm"
+            scope="request"
+            validate="false"
+            path="/changePassword">
+            <forward name="showPage" path="tutorInfo.changePassword.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="updatePasswordForm"
+            type="ps.edu.diyar.studentInfo.actions.UpdatePasswordAction"
+            validate="true"
+            input="/changePassword.do"
+            scope="request"
+            path="/updateCmaPassword">
+            <forward name="success" path="tutorInfo.processResultPage.tile" contextRelative="true"/>
+            <forward name="failed" path="/changePassword.do"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.tutorInfo.actions.ShowMarkInsertionAction"
+            path="/showAttendTbl">
+            <forward name="success" path="tutorInfo.showAttendTbl.tile" contextRelative="true"/>
+        </action>
+
+         <action
+            path="/goToDeptMstrAcount"
+            type="ps.edu.diyar.tutorInfo.actions.GoToDeptMstrAcountAction">
+            <forward name="fail"           path="tutorInfo.processResultPage.tile"    contextRelative="true"/>
+            <forward name="deptMstrLayout" path="/deptMstr/main.do"   redirect="true" contextRelative="true"/>
+        </action>
+
+
+    </action-mappings>
+
+    <!-- ========== Controller Configuration ================================ -->
+    <controller nocache="true" maxFileSize="10M"/>
+
+    <!-- ========== Message Resources Definitions ============================ -->
+    <message-resources parameter="ApplicationResources"/>
+
+    <!-- ========== Plug Ins Configuration ================================= -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tilesDef/tilesDef-tutor.xml" property="definitions-config"/>
+        <set-property value="true" property="moduleAware"/>
+        <set-property value="true" property="definitions-parser-validate"/>
+    </plug-in>
+</struts-config>

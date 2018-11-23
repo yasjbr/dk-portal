@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+    
+    
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlNotifications"
+            table="PRTL_NOTIFICATIONS"
+            >
+        <id
+                name="notId"
+                type="java.lang.Long"
+                column="NOT_ID"
+                >
+            <generator class="sequence">
+                <param name="sequence">PRTL_NOTIFICATIONS_SEQ</param>
+            </generator>
+
+        </id>
+        <property
+                name="notMsg"
+                type="java.lang.String"
+                column="not_msg"
+                not-null="true"
+                length="1000"
+                />
+ 
+ 
+
+    </class>
+    
+    
+    
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlMessageContent"
+            table="PRTL_MESSAGE_CONTENT"
+            >
+        <id
+                name="msgId"
+                type="java.lang.Long"
+                column="MSG_ID"
+                >
+            <generator class="sequence">
+                <param name="sequence">PRTL_MESSAGE_CONTENT_SEQ</param>
+            </generator>
+
+        </id>
+        <property
+                name="msgTitle"
+                type="java.lang.String"
+                column="MSG_TITLE"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="msgBody"
+                type="java.sql.Clob"
+                column="MSG_BODY"
+                not-null="true"
+                length="4000"
+                />
+        <property
+                name="msgType"
+                type="java.lang.String"
+                column="MSG_TYPE"
+                length="20"
+                />
+        <property
+                name="hasAttachment"
+                type="java.lang.String"
+                column="HAS_ATTACHMENT"
+                length="1"
+                />
+        <property
+                name="servirity"
+                type="java.lang.String"
+                column="SERVIRITY"
+                length="50"
+                />
+        <property
+                name="seed"
+                type="java.lang.String"
+                column="SEED"
+                length="50"
+                />
+        <property
+                name="senderId"
+                type="java.lang.String"
+                column="SENDER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="termNo"
+                type="java.lang.String"
+                column="TERM_NO"
+                length="4"
+                />
+        <property
+                name="crsNo"
+                type="java.lang.String"
+                column="CRS_NO"
+                length="8"
+                />
+        <property
+                name="classNo"
+                type="java.lang.String"
+                column="CLASS_NO"
+                length="3"
+                />
+        <property
+                name="extraInfo"
+                type="java.lang.String"
+                column="EXTRA_INFO"
+                length="120"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="computerIp"
+                type="java.lang.String"
+                column="COMPUTER_IP"
+                length="20"
+                />
+
+          <property
+                name="deleted"
+                type="java.lang.String"
+                column="deleted"
+                length="20"
+                />
+          
+            <property
+                name="deleteDate"
+                type="java.lang.String"
+                column="delete_date"
+                length="20"
+                />
+         
+        <!-- associations -->
+
+    </class>
+
+    <!-- ******************************************************************************* -->
+
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlMessageAttachment"
+            table="PRTL_MESSAGE_ATTACHMENT"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.messaging.database.PrtlMessageAttachmentPK">
+            <key-property name="fileId" column="FILE_ID" type="java.lang.Long"/>
+            <key-property name="msgId" column="MSG_ID" type="java.lang.Long"/>
+        </composite-id>
+        <property
+                name="fileName"
+                type="java.lang.String"
+                column="FILE_NAME"
+                not-null="true"
+                length="200"
+                />
+        <property
+                name="fileContent"
+                type="java.sql.Blob"
+                column="FILE_CONTENT"
+                length="4000"
+                />
+        <property
+                name="fileType"
+                type="java.lang.String"
+                column="FILE_TYPE"
+                length="100"
+                />
+        <property
+                name="fileSize"
+                type="java.lang.String"
+                column="FILE_SIZE"
+                length="20"
+                />
+        <property
+                name="seed"
+                type="java.lang.String"
+                column="SEED"
+                not-null="true"
+                length="50"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                length="7"
+                />
+
+        <!-- associations -->
+
+    </class>
+
+    <!-- ******************************************************************************* -->
+
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlMessageRecipient"
+            table="PRTL_MESSAGE_RECIPIENTS"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.messaging.database.PrtlMessageRecipientPK">
+            <key-property name="msgId" column="MSG_ID" type="java.lang.Long"/>
+            <key-property name="recipientId" column="RECIPIENT_ID" type="java.lang.String"/>
+        </composite-id>
+        <property
+                name="viewed"
+                type="java.lang.String"
+                column="VIEWED"
+                not-null="true"
+                length="1"
+                />
+        <property
+                name="viewDate"
+                type="java.util.Date"
+                column="VIEW_DATE"
+                length="7"
+                />
+        <property
+                name="computerIp"
+                type="java.lang.String"
+                column="COMPUTER_IP"
+                length="20"
+                />
+ <property
+                name="deleted"
+                type="java.lang.String"
+                column="DELETED"
+                length="20"
+                />
+ 
+  <property
+                name="deleteDate"
+                type="java.lang.String"
+                column="DELETE_DATE"
+                length="20"
+                />
+        <!-- associations -->
+
+    </class>
+
+    <!-- ******************************************************************************* -->
+
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVw"
+            table="PRTL_MSG_SENDER_INFO_VW"
+            >
+
+        <composite-id name="comp_id" class="ps.edu.diyar.messaging.database.PrtlMsgSenderInfoVwPK">
+            <key-property name="msgId" column="MSG_ID" type="java.lang.Long"/>
+            <key-property name="senderId" column="SENDER_ID" type="java.lang.String"/>
+        </composite-id>
+
+
+        <property
+                name="msgTitle"
+                type="java.lang.String"
+                column="MSG_TITLE"
+                length="100"
+                />
+        <property
+                name="msgBody"
+                type="java.lang.String"
+                column="MSG_BODY"
+                />
+        <property
+                name="hasAttachment"
+                type="java.lang.String"
+                column="HAS_ATTACHMENT"
+                length="1"
+                />
+        <property
+                name="termNo"
+                type="java.lang.String"
+                column="TERM_NO"
+                length="4"
+                />
+        <property
+                name="crsNo"
+                type="java.lang.String"
+                column="CRS_NO"
+                length="8"
+                />
+        <property
+                name="classNo"
+                type="java.lang.String"
+                column="CLASS_NO"
+                length="3"
+                />
+        <property
+                name="viewed"
+                type="java.lang.String"
+                column="VIEWED"
+                length="1"
+                />
+        <property
+                name="viewDate"
+                type="java.util.Date"
+                column="VIEW_DATE"
+                length="7"
+                />
+        <property
+                name="msgDate"
+                type="java.util.Date"
+                column="MSG_DATE"
+                length="7"
+                />
+        <property
+                name="recipientId"
+                type="java.lang.String"
+                column="RECIPIENT_ID"
+                length="20"
+                />
+        <property
+                name="extraInfo"
+                type="java.lang.String"
+                column="EXTRA_INFO"
+                length="120"
+                />
+        <property
+                name="senderName"
+                type="java.lang.String"
+                column="SENDER_NAME"
+                length="83"
+                />
+       <property
+                name="servirity"
+                type="java.lang.String"
+                column="SERVIRITY"
+                />
+        <property
+                name="msgSeed"
+                type="java.lang.String"
+                column="MSG_SEED"
+                />
+
+        <property
+                name="recipientName"
+                type="java.lang.String"
+                column="RECIPIENT_NAME"
+                length="83"
+                />
+        
+        
+                <property
+                name="recipientDeleted"
+                type="java.lang.String"
+                column="RECIPIENT_deleted"
+                length="12"
+                />
+        
+                
+                <property
+                name="senderDeleted"
+                type="java.lang.String"
+                column="sender_deleted"
+                length="12"
+                />
+                
+        <!-- associations -->
+
+    </class>
+
+
+    <!-- ******************************************************************************* -->
+
+<!-- ******************************************************************************* -->
+
+    <class
+            name="ps.edu.diyar.messaging.database.PrtlMsgTutorInfoVw"
+            table="PRTL_MSG_TUTOR_INFO_VW"
+            >
+
+        <composite-id name="comp_id" class="ps.edu.diyar.messaging.database.PrtlMsgTutorInfoVwPK">
+            <key-property name="msgId" column="MSG_ID" type="java.lang.Long"/>
+            <key-property name="senderId" column="SENDER_ID" type="java.lang.String"/>
+        </composite-id>
+
+
+        <property
+                name="msgTitle"
+                type="java.lang.String"
+                column="MSG_TITLE"
+                length="100"
+                />
+        <property
+                name="msgBody"
+                type="java.lang.String"
+                column="MSG_BODY"
+                />
+        <property
+                name="hasAttachment"
+                type="java.lang.String"
+                column="HAS_ATTACHMENT"
+                length="1"
+                />
+        <property
+                name="termNo"
+                type="java.lang.String"
+                column="TERM_NO"
+                length="4"
+                />
+        <property
+                name="crsNo"
+                type="java.lang.String"
+                column="CRS_NO"
+                length="8"
+                />
+        <property
+                name="classNo"
+                type="java.lang.String"
+                column="CLASS_NO"
+                length="3"
+                />
+         
+        <property
+                name="msgDate"
+                type="java.util.Date"
+                column="MSG_DATE"
+                length="7"
+                />
+         
+        <property
+                name="extraInfo"
+                type="java.lang.String"
+                column="EXTRA_INFO"
+                length="120"
+                />
+        <property
+                name="senderName"
+                type="java.lang.String"
+                column="SENDER_NAME"
+                length="83"
+                />
+       <property
+                name="servirity"
+                type="java.lang.String"
+                column="SERVIRITY"
+                />
+        <property
+                name="msgSeed"
+                type="java.lang.String"
+                column="MSG_SEED"
+                />
+
+        
+                
+                <property
+                name="senderDeleted"
+                type="java.lang.String"
+                column="sender_deleted"
+                length="12"
+                />
+                
+        <!-- associations -->
+
+    </class>
+
+
+</hibernate-mapping>

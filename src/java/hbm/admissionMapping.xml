@@ -1,0 +1,1071 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+
+
+    <class
+            name="ps.edu.diyar.admission.database.PrtlAdmAccount"
+            table="PRTL_ADM_ACCOUNTS"
+            >
+        <id
+                name="accNo"
+                type="java.lang.String"
+                column="ACC_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="accPasswd"
+                type="java.lang.String"
+                column="ACC_PASSWD"
+                not-null="true"
+                />
+        <property
+                name="accIsActive"
+                type="java.lang.String"
+                column="ACC_IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+
+    </class>
+
+    <!--  **********************************************************************************************  -->
+
+    <class
+            name="ps.edu.diyar.admission.database.PrtlAdmApplication"
+            table="PRTL_ADM_APPLICATION"
+            >
+        <id
+                name="appNo"
+                type="java.lang.String"
+                column="APP_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="termNo"
+                type="java.lang.String"
+                column="TERM_NO"
+                not-null="true"
+                />
+        <property
+                name="appStudentCat"
+                type="java.lang.String"
+                column="APP_STUDENT_CAT"
+
+                />
+        <property
+                name="firstName"
+                type="java.lang.String"
+                column="FIRST_NAME"
+
+                />
+        <property
+                name="secondName"
+                type="java.lang.String"
+                column="SECOND_NAME"
+
+                />
+        <property
+                name="thirdName"
+                type="java.lang.String"
+                column="THIRD_NAME"
+
+                />
+        <property
+                name="familyName"
+                type="java.lang.String"
+                column="FAMILY_NAME"
+
+                />
+        <property
+                name="firstNameE"
+                type="java.lang.String"
+                column="FIRST_NAME_E"
+
+                />
+        <property
+                name="secondNameE"
+                type="java.lang.String"
+                column="SECOND_NAME_E"
+
+                />
+        <property
+                name="thirdNameE"
+                type="java.lang.String"
+                column="THIRD_NAME_E"
+
+                />
+        <property
+                name="familyNameE"
+                type="java.lang.String"
+                column="FAMILY_NAME_E"
+
+                />
+        <property
+                name="gender"
+                type="java.lang.String"
+                column="GENDER"
+
+                />
+        <property
+                name="idcardType"
+                type="java.lang.String"
+                column="IDCARD_TYPE"
+
+                />
+        <property
+                name="idcardNo"
+                type="java.lang.String"
+                column="IDCARD_NO"
+
+                />
+        <property
+                name="fatherName"
+                type="java.lang.String"
+                column="FATHER_NAME"
+
+                />
+        <property
+                name="fatherCert"
+                type="java.lang.String"
+                column="FATHER_CERT"
+                />
+        <property
+                name="fatherJob"
+                type="java.lang.String"
+                column="FATHER_JOB"
+                />
+        <property
+                name="motherName"
+                type="java.lang.String"
+                column="MOTHER_NAME"
+
+                />
+        <property
+                name="motherCert"
+                type="java.lang.String"
+                column="MOTHER_CERT"
+                />
+        <property
+                name="motherJob"
+                type="java.lang.String"
+                column="MOTHER_JOB"
+                />
+        <property
+                name="perBoxNo"
+                type="java.lang.String"
+                column="PER_BOX_NO"
+                />
+        <property
+                name="perStreet"
+                type="java.lang.String"
+                column="PER_STREET"
+                />
+        <property
+                name="perCountry"
+                type="java.lang.String"
+                column="PER_COUNTRY"
+                />
+        <property
+                name="perGovernate"
+                type="java.lang.String"
+                column="PER_GOVERNATE"
+                />
+        <property
+                name="perLocality"
+                type="java.lang.String"
+                column="PER_LOCALITY"
+                />
+        <property
+                name="perTel"
+                type="java.lang.String"
+                column="PER_TEL"
+                />
+        <property
+                name="perMobile"
+                type="java.lang.String"
+                column="PER_MOBILE"
+                />
+        <property
+                name="perEmail"
+                type="java.lang.String"
+                column="PER_EMAIL"
+                />
+        <property
+                name="currBoxNo"
+                type="java.lang.String"
+                column="CURR_BOX_NO"
+                />
+        <property
+                name="currStreet"
+                type="java.lang.String"
+                column="CURR_STREET"
+                />
+        <property
+                name="currCountry"
+                type="java.lang.String"
+                column="CURR_COUNTRY"
+                />
+        <property
+                name="currGovernate"
+                type="java.lang.String"
+                column="CURR_GOVERNATE"
+                />
+        <property
+                name="currLocality"
+                type="java.lang.String"
+                column="CURR_LOCALITY"
+                />
+        <property
+                name="currTel"
+                type="java.lang.String"
+                column="CURR_TEL"
+                />
+        <property
+                name="currMobile"
+                type="java.lang.String"
+                column="CURR_MOBILE"
+                />
+        <property
+                name="currEmail"
+                type="java.lang.String"
+                column="CURR_EMAIL"
+                />
+        <property
+                name="birthCountry"
+                type="java.lang.String"
+                column="BIRTH_COUNTRY"
+
+                />
+        <property
+                name="birthLocality"
+                type="java.lang.String"
+                column="BIRTH_LOCALITY"
+
+                />
+        <property
+                name="birthGovernate"
+                type="java.lang.String"
+                column="BIRTH_GOVERNATE"
+                />
+        <property
+                name="birthDate"
+                type="java.util.Date"
+                column="BIRTH_DATE"
+
+                />
+        <property
+                name="maritalStatus"
+                type="java.lang.String"
+                column="MARITAL_STATUS"
+
+                />
+        <property
+                name="noOfChildrens"
+                type="java.lang.Integer"
+                column="NO_OF_CHILDRENS"
+                />
+        <property
+                name="nationality"
+                type="java.lang.String"
+                column="NATIONALITY"
+
+                />
+        <property
+                name="healthStatus"
+                type="java.lang.String"
+                column="HEALTH_STATUS"
+
+                />
+        <property
+                name="emergencyAddress"
+                type="java.lang.String"
+                column="EMERGENCY_ADDRESS"
+
+                />
+        <property
+                name="emergencyTel"
+                type="java.lang.String"
+                column="EMERGENCY_TEL"
+
+                />
+        <property
+                name="healthSituation"
+                type="java.lang.String"
+                column="HEALTH_SITUATION"
+                />
+        <property
+                name="schoolNo"
+                type="java.lang.String"
+                column="SCHOOL_NO"
+
+                />
+        <property
+                name="schoolBoxNo"
+                type="java.lang.String"
+                column="SCHOOL_BOX_NO"
+                />
+        <property
+                name="schoolStreet"
+                type="java.lang.String"
+                column="SCHOOL_STREET"
+                />
+        <property
+                name="schoolCountry"
+                type="java.lang.String"
+                column="SCHOOL_COUNTRY"
+                />
+        <property
+                name="schoolGovernate"
+                type="java.lang.String"
+                column="SCHOOL_GOVERNATE"
+                />
+        <property
+                name="schoolLocality"
+                type="java.lang.String"
+                column="SCHOOL_LOCALITY"
+                />
+        <property
+                name="schoolType"
+                type="java.lang.String"
+                column="SCHOOL_TYPE"
+
+                />
+        <property
+                name="tawOrigin"
+                type="java.lang.String"
+                column="TAW_ORIGIN"
+
+                />
+        <property
+                name="tawYear"
+                type="java.lang.String"
+                column="TAW_YEAR"
+
+                />
+        <property
+                name="tawAvg"
+                type="java.lang.Double"
+                column="TAW_AVG"
+                />
+        <property
+                name="tawSeat"
+                type="java.lang.String"
+                column="TAW_SEAT"
+                />
+        <property
+                name="tawBranch"
+                type="java.lang.String"
+                column="TAW_BRANCH"
+
+                />
+        <property
+                name="appStatus"
+                type="java.lang.String"
+                column="APP_STATUS"
+
+                />
+        <property
+                name="collegeNo"
+                type="java.lang.String"
+                column="COLLEGE_NO"
+
+                />
+        <property
+                name="specNo"
+                type="java.lang.String"
+                column="SPEC_NO"
+
+                />
+        <property
+                name="collegeNoOther"
+                type="java.lang.String"
+                column="COLLEGE_NO_OTHER"
+                />
+        <property
+                name="specNoOther"
+                type="java.lang.String"
+                column="SPEC_NO_OTHER"
+                />
+        <property
+                name="admStatus"
+                type="java.lang.String"
+                column="ADM_STATUS"
+
+                />
+        <property
+                name="englishMark"
+                type="java.lang.Integer"
+                column="ENGLISH_MARK"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+
+
+    </class>
+
+    <!--  **********************************************************************************************  -->
+    <class
+            name="ps.edu.diyar.admission.database.PrtlAdmEducation"
+            table="PRTL_ADM_EDUCATION"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.admission.database.PrtlAdmEducationPK">
+            <key-property name="ucNo" column="UC_NO" type="java.lang.String"/>
+            <key-property name="appNo" column="APP_NO" type="java.lang.String"/>
+            <key-property name="eduStartDate" column="EDU_START_DATE" type="java.util.Date"/>
+        </composite-id>
+        <property
+                name="eduEndDate"
+                type="java.util.Date"
+                column="EDU_END_DATE"
+                not-null="true"
+                />
+        <property
+                name="specTypeNo"
+                type="java.lang.String"
+                column="SPEC_TYPE_NO"
+                not-null="true"
+                />
+        <property
+                name="specNo"
+                type="java.lang.String"
+                column="SPEC_NO"
+                not-null="true"
+                />
+        <property
+                name="eduGradeDate"
+                type="java.util.Date"
+                column="EDU_GRADE_DATE"
+                not-null="true"
+                />
+        <property
+                name="ucCountry"
+                type="java.lang.String"
+                column="UC_COUNTRY"
+                />
+        <property
+                name="ucGovernate"
+                type="java.lang.String"
+                column="UC_GOVERNATE"
+                />
+        <property
+                name="ucLocality"
+                type="java.lang.String"
+                column="UC_LOCALITY"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+
+    </class>
+    <!--  **********************************************************************************************  -->
+    <class
+            name="ps.edu.diyar.admission.database.PrtlAdmLanguage"
+            table="PRTL_ADM_LANGUAGE"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.admission.database.PrtlAdmLanguagePK">
+            <key-property name="appNo" column="APP_NO" type="java.lang.String"/>
+            <key-property name="langNo" column="LANG_NO" type="java.lang.String"/>
+        </composite-id>
+        <property
+                name="readLevelNo"
+                type="java.lang.String"
+                column="READ_LEVEL_NO"
+                />
+
+        <property
+                name="writeLevelNo"
+                type="java.lang.String"
+                column="WRITE_LEVEL_NO"
+
+                />
+        <property
+                name="speakLevelNo"
+                type="java.lang.String"
+                column="SPEAK_LEVEL_NO"
+
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+
+    </class>
+    <!--  **********************************************************************************************  -->
+
+
+    <class
+            name="ps.edu.diyar.admission.database.RegSchool"
+            table="REG_SCHOOL"
+            >
+        <id
+                name="schoolNo"
+                type="java.lang.String"
+                column="SCHOOL_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="schoolAName"
+                type="java.lang.String"
+                column="SCHOOL_A_NAME"
+                not-null="true"
+                />
+        <property
+                name="schoolLName"
+                type="java.lang.String"
+                column="SCHOOL_L_NAME"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                />
+        <property
+                name="countryNo"
+                type="java.lang.String"
+                column="COUNTRY_NO"
+                not-null="true"
+                />
+        <property
+                name="governate"
+                type="java.lang.String"
+                column="GOVERNATE"
+                not-null="true"
+                />
+        <property
+                name="localityNo"
+                type="java.lang.String"
+                column="LOCALITY_NO"
+                not-null="true"
+                />
+        <property
+                name="street"
+                type="java.lang.String"
+                column="STREET"
+                />
+    </class>
+    <!--  **********************************************************************************************  -->
+
+    <class
+            name="ps.edu.diyar.studentInfo.database.RegMaritalStatus"
+            table="REG_MARITAL_STATUS"
+            >
+        <id
+                name="statusNo"
+                type="java.lang.String"
+                column="STATUS_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="statusAName"
+                type="java.lang.String"
+                column="STATUS_A_NAME"
+                not-null="true"
+                />
+        <property
+                name="statusLName"
+                type="java.lang.String"
+                column="STATUS_L_NAME"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                />
+
+    </class>
+    <!--  **********************************************************************************************  -->
+
+    <class
+            name="ps.edu.diyar.admission.database.RegHealthStatus"
+            table="REG_HEALTH_STATUS"
+            >
+        <id
+                name="statusNo"
+                type="java.lang.String"
+                column="STATUS_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="statusAName"
+                type="java.lang.String"
+                column="STATUS_A_NAME"
+                not-null="true"
+                />
+        <property
+                name="statusLName"
+                type="java.lang.String"
+                column="STATUS_L_NAME"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                />
+    </class>
+
+    <!--  **********************************************************************************************  -->
+    <class
+            name="ps.edu.diyar.admission.database.RegTawOrigin"
+            table="REG_TAW_ORIGIN"
+            >
+        <id
+                name="tawOriginNo"
+                type="java.lang.String"
+                column="TAW_ORIGIN_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="tawOriginAName"
+                type="java.lang.String"
+                column="TAW_ORIGIN_A_NAME"
+                not-null="true"
+                />
+        <property
+                name="tawOriginLName"
+                type="java.lang.String"
+                column="TAW_ORIGIN_L_NAME"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                />
+        <property
+                name="hasBranch"
+                type="java.lang.String"
+                column="HAS_BRANCH"
+                />
+
+    </class>
+    <!--  **********************************************************************************************  -->
+    <class
+            name="ps.edu.diyar.admission.database.RegTawBranch"
+            table="REG_TAW_BRANCH"
+            >
+        <id
+                name="tawBranchNo"
+                type="java.lang.String"
+                column="TAW_BRANCH_NO"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="tawBranchAName"
+                type="java.lang.String"
+                column="TAW_BRANCH_A_NAME"
+                not-null="true"
+                />
+        <property
+                name="tawBranchLName"
+                type="java.lang.String"
+                column="TAW_BRANCH_L_NAME"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                not-null="true"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                />
+    </class>
+
+    <!--  **********************************************************************************************  -->
+    <class
+            name="ps.edu.diyar.admission.database.AdmAppsCriteria"
+            table="ADM_APPS_CRITERIA"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.admission.database.AdmAppsCriteriaPK">
+            <key-property name="applId" column="APPL_ID" type="java.lang.String"/>
+            <key-property name="crtYear" column="CRT_YEAR" type="short"/>
+            <key-property name="specNo" column="SPEC_NO" type="java.lang.String"/>
+            <key-property name="crtId" column="CRT_ID" type="byte"/>
+        </composite-id>
+        <property
+                name="crtPoints"
+                type="java.math.BigDecimal"
+                column="CRT_POINTS"
+                length="4"
+                />
+        <property
+                name="appsCrtPoints"
+                type="java.math.BigDecimal"
+                column="APPS_CRT_POINTS"
+                length="4"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="timeStamp"
+                type="java.sql.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                length="1"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                length="200"
+                />
+
+        <!-- associations -->
+
+    </class>
+    <class
+            name="ps.edu.diyar.admission.database.AdmAppsException"
+            table="ADM_APPS_EXCEPTIONS"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.admission.database.AdmAppsExceptionPK">
+            <key-property name="applId" column="APPL_ID" type="java.lang.String"/>
+            <key-property name="expId" column="EXP_ID" type="byte"/>
+        </composite-id>
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="timeStamp"
+                type="java.sql.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                length="1"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                length="200"
+                />
+
+        <!-- associations -->
+
+    </class>
+
+    <!-- ************************************************** -->
+    <class
+            name="ps.edu.diyar.admission.database.AdmExceptionsTyp"
+            table="ADM_EXCEPTIONS_TYPES"
+            >
+        <id
+                name="expId"
+                type="byte"
+                column="EXP_ID"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="expAName"
+                type="java.lang.String"
+                column="EXP_A_NAME"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="expLName"
+                type="java.lang.String"
+                column="EXP_L_NAME"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="timeStamp"
+                type="java.sql.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                length="1"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                length="200"
+                />
+
+        <!-- associations -->
+        <!-- bi-directional one-to-many association to AdmAppsException -->
+        <set
+                name="admAppsExceptions"
+                lazy="true"
+                inverse="true"
+                >
+            <key>
+                <column name="EXP_ID"/>
+            </key>
+            <one-to-many
+                    class="ps.edu.diyar.admission.database.AdmAppsException"
+                    />
+        </set>
+
+    </class>
+    <class
+            name="ps.edu.diyar.admission.database.AdmCriteriaTyp"
+            table="ADM_CRITERIA_TYPES"
+            >
+        <composite-id name="comp_id" class="ps.edu.diyar.admission.database.AdmCriteriaTypPK">
+            <key-property name="specNo" column="SPEC_NO" type="java.lang.String"/>
+            <key-property name="crtYear" column="CRT_YEAR" type="short"/>
+            <key-property name="crtId" column="CRT_ID" type="byte"/>
+        </composite-id>
+        <property
+                name="crtAName"
+                type="java.lang.String"
+                column="CRT_A_NAME"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="crtLName"
+                type="java.lang.String"
+                column="CRT_L_NAME"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="crtPoints"
+                type="java.math.BigDecimal"
+                column="CRT_POINTS"
+                length="4"
+                />
+        <property
+                name="crtStatus"
+                type="java.lang.String"
+                column="CRT_STATUS"
+                not-null="true"
+                length="2"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="timeStamp"
+                type="java.sql.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                length="1"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                length="200"
+                />
+
+
+    </class>
+
+    <!-- ***************************************************************************************************************** -->
+    <class
+            name="ps.edu.diyar.admission.database.AdmAppsStatus"
+            table="ADM_APPS_STATUS"
+            >
+        <id
+                name="statId"
+                type="java.lang.String"
+                column="STAT_ID"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="statAName"
+                type="java.lang.String"
+                column="STAT_A_NAME"
+                not-null="true"
+                length="100"
+                />
+        <property
+                name="statLName"
+                type="java.lang.String"
+                column="STAT_L_NAME"
+                length="100"
+                />
+        <property
+                name="userId"
+                type="java.lang.String"
+                column="USER_ID"
+                not-null="true"
+                length="20"
+                />
+        <property
+                name="timeStamp"
+                type="java.util.Date"
+                column="TIME_STAMP"
+                not-null="true"
+                length="7"
+                />
+        <property
+                name="isActive"
+                type="java.lang.String"
+                column="IS_ACTIVE"
+                length="1"
+                />
+        <property
+                name="notes"
+                type="java.lang.String"
+                column="NOTES"
+                length="200"
+                />
+
+        <!-- associations -->
+
+    </class>
+
+
+</hibernate-mapping>

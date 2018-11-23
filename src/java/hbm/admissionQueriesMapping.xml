@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+     <query
+        name="adm.getOpenedAdmCalenderItem">
+         <![CDATA[
+              from  ps.edu.diyar.studentInfo.database.RegCalendar a
+                where
+                      a.comp_id.calendarItem='AD'
+                  and a.comp_id.termNo in ( select b.setupValue from ps.edu.diyar.studentInfo.database.PrtlSetup b where b.setupKey='admTerm')
+                  and a.begDate <= ?
+                  and a.endDate >= ?
+                  order by  a.comp_id.calendarItem
+             ]]>
+     </query>
+
+
+     <query
+        name="adm.getAdmTermNo">
+         <![CDATA[
+              from  ps.edu.diyar.studentInfo.database.PrtlSetup a
+                where
+                      a.setupKey='admTerm'
+                  order by  a.setupKey
+             ]]>
+     </query>
+
+
+     <query
+        name="adm.getAdmAccountInfo">
+        <![CDATA[
+              from  ps.edu.diyar.admission.database.PrtlAdmAccount a
+                where
+                      a.accNo=?
+                      and a.accPasswd=?
+                      and a.accIsActive='Y'
+                  order by  a.accNo
+             ]]>
+    </query>
+
+     <query
+        name="adm.getLangList">
+         <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.langAName,a.langNo)
+              from  ps.edu.diyar.studentInfo.database.RegLang a
+
+                  order by  a.langAName
+             ]]>
+     </query>
+
+    <query
+        name="adm.getLangLevelList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.levelAName,a.levelNo)
+              from  ps.edu.diyar.studentInfo.database.RegLangLevel a
+
+                  order by  a.levelAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getCollegelList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.collegeAName,a.collegeNo)
+              from  ps.edu.diyar.studentInfo.database.RegCollege a
+                  where a.isActive='1'
+                  order by  a.collegeAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getCountrylList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.countryAName,a.countryNo)
+              from  ps.edu.diyar.studentInfo.database.RegCountry a
+                  where a.isActive='1'
+                  order by  a.countryAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getUnivColglList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.ucAName,a.ucNo)
+              from  ps.edu.diyar.studentInfo.database.RegUnivColg a
+                  where a.isActive='1'
+                  order by  a.ucAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getSchoolList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.schoolAName,a.schoolNo)
+              from  ps.edu.diyar.admission.database.RegSchool a
+                  where a.isActive='1'
+                  order by  a.schoolAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getMaritalStatusList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.statusAName,a.statusNo)
+              from  ps.edu.diyar.studentInfo.database.RegMaritalStatus a
+                  where a.isActive='1'
+                  order by  a.statusAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getHealthStatusList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.statusAName,a.statusNo)
+              from  ps.edu.diyar.admission.database.RegHealthStatus a
+                  where a.isActive='1'
+                  order by  a.statusAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getCertTypesList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.certAName,a.certNo)
+              from  ps.edu.diyar.studentInfo.database.RegCertTypes a
+                  where a.isActive='1'
+                  order by  a.certAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getJobsList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.jobAName,a.jobNo)
+              from  ps.edu.diyar.studentInfo.database.RegJobs a
+                  where a.isActive='1'
+                  order by  a.jobAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getSpecDiplomaList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.specAName,a.specNo)
+              from  ps.edu.diyar.studentInfo.database.RegSpecDiploma a
+                  where a.isActive='1'
+                  order by  a.specAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getSpecTypesList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.specTypeAName,a.specTypeNo)
+              from  ps.edu.diyar.studentInfo.database.RegSpecTypes a
+                  where a.isActive='1'
+                  order by  a.specTypeAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getTawOriginList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.tawOriginAName,a.tawOriginNo)
+              from  ps.edu.diyar.admission.database.RegTawOrigin a
+                  where a.isActive='1'
+                  order by  a.tawOriginAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getTawBranchList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.tawBranchAName,a.tawBranchNo)
+              from  ps.edu.diyar.admission.database.RegTawBranch a
+                  where a.isActive='1'
+                  order by  a.tawBranchAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getSpecsOfCollegeNoList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (b.specTypeAName,a.specAName,a.specNo)
+              from  ps.edu.diyar.studentInfo.database.RegSpec a ,
+                    ps.edu.diyar.studentInfo.database.RegSpecTypes b
+                  where a.isActive='1'
+                        and a.collegeNo=?
+                        and a.specTypeNo=b.specTypeNo
+                  order by  a.specAName
+             ]]>
+    </query>
+
+
+    <query
+        name="adm.getNationalityForGenderMList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.natAMaleName,a.countryNo)
+              from  ps.edu.diyar.studentInfo.database.RegCountry a
+                  where a.isActive='1' 
+                  order by  a.natAMaleName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getNationalityForGenderFList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.natAFemaleName,a.countryNo)
+              from  ps.edu.diyar.studentInfo.database.RegCountry a
+                  where a.isActive='1'
+                  order by  a.natAMaleName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getGovernateList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.govAName,a.comp_id.govNo)
+              from  ps.edu.diyar.studentInfo.database.RegGovernate a
+                  where a.isActive='1'
+                       and a.comp_id.countryNo=?
+                  order by  a.govAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getLocalityList">
+        <![CDATA[
+               select new ps.edu.diyar.common.struct.LabelValue
+              (a.localityAName,a.comp_id.localityNo)
+              from  ps.edu.diyar.studentInfo.database.RegLocality a
+                  where a.isActive='1'
+                       and a.comp_id.countryNo=?
+                       and a.comp_id.govNo=?
+                  order by  a.localityAName
+             ]]>
+    </query>
+
+    <query
+        name="adm.getAdmApplicationLoadData">
+        <![CDATA[
+               from  ps.edu.diyar.admission.database.PrtlAdmApplication a
+                  where
+                           a.appNo=?
+                       and a.termNo=?
+                  order by  a.termNo
+             ]]>
+    </query>
+
+    <query
+        name="adm.getAdmEduInfo">
+        <![CDATA[
+               from  ps.edu.diyar.admission.database.PrtlAdmEducation a
+                  where
+                           a.comp_id.appNo=?
+                  order by  a.comp_id.appNo
+             ]]>
+    </query>
+
+    <query
+        name="adm.getAdmLangInfo">
+        <![CDATA[
+               from  ps.edu.diyar.admission.database.PrtlAdmLanguage a
+                  where
+                           a.comp_id.appNo=?
+                  order by  a.comp_id.appNo
+             ]]>
+    </query>
+
+
+    <query
+        name="adm.getAdmStatus">
+        <![CDATA[
+               from  ps.edu.diyar.admission.database.AdmAppsStatus a
+                  where
+                           a.statId=?
+                  order by  a.statId
+             ]]>
+    </query>
+
+    <query
+        name="adm.getAppNoInPrvTerm">
+        <![CDATA[
+               from  ps.edu.diyar.admission.database.PrtlAdmApplication a
+                  where
+                           a.appNo=?
+                           and a.termNo != ?
+                  order by  a.termNo
+             ]]>
+    </query>
+    
+
+</hibernate-mapping>

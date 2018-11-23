@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+        "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="basicLayout" path="/pages/layout/basicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="studentInfo.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/studentInfo/studentInfoHeader.jsp"/>
+    </definition>
+
+    <!-- ========= The definition of the wider layout for the regisrtation pages ========== -->
+    <definition name="widerLayout" path="/pages/layout/widerLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="studentInfo.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/studentInfo/studentInfoHeader.jsp"/>
+    </definition>
+
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="printBasicLayout" path="/pages/layout/printBasicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="studentInfo.subHeader.print.tile"/>
+        <put name="body" value="variet"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/studentInfo/studentInfoHeader.jsp"/>
+    </definition>
+
+    <!--============Main Defintion==================-->
+    <definition name="studentInfo.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+        <putList name="items">
+            <item value="الصفحة الرئيسية" link="/student/main.do"/>
+            <item value="خـــروج" link="/student/logout.do"/>
+        </putList>
+    </definition>
+
+    <!-- ===  Right Menu def. for student module contains calender sub menu only ==== -->
+    <definition name="studentInfo.rightMenu.custom" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/studentInfo/menu_right.jsp"/>
+            <add value="/pages/studentInfo/menu_setting.jsp"/>
+        </putList>
+    </definition>
+
+    <!-- =======  definition of the headers to get subtitle and subheader menu content =============== -->
+    <!--============Main Defintion==================-->
+    <definition name="studentInfo.emptySubHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+    <!--============Main print pages Defintion==================-->
+    <definition name="studentInfo.subHeader.print.tile" path="/pages/layout/printPageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+    <!-- ========= The definition Student module with no polls or setting menues========== -->
+    <definition name="studentInfoSubLayout" extends="basicLayout">
+        <put name="rightMenuBar" value="studentInfo.rightMenu.custom"/>
+    </definition>
+    <!-- ========= The definition Student module print pages without menues========== -->
+    <definition name="studentInfoPrintLayout" extends="printBasicLayout">
+    </definition>
+
+    <!-- ========= The definition Student module print pages without menues========== -->
+    <definition name="studentInfoPrintLayoutWithoutHeader" extends="printBasicLayout">
+        <put name="header" value="variet"/>
+    </definition>
+    <!-- ========= The definition Student module with polls or setting menues ========== -->
+    <definition name="studentInfoMainLayout" extends="basicLayout">
+        <put name="rightMenuBar" value="studentInfo.rightMenu.all"/>
+    </definition>
+
+    <!-- ========= The definition Student wider view board module with no polls or setting menues========== -->
+    <definition name="studentInfoSubWiderLayout" extends="widerLayout">
+        <put name="rightMenuBar" value="studentInfo.rightMenu.custom"/>
+    </definition>
+
+
+    <!-- ===  left Menu def. for student module contains all sub menus ==== -->
+    <definition name="studentInfo.leftMenu.all" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/studentInfo/menu_right.jsp"/>
+            <add value="/pages/studentInfo/menu_setting.jsp"/>
+            <!--<add value="/pages/sharedIncludes/insidePoll.jsp"/>-->
+            <!--<add value="/pages/sharedIncludes/ms-live-banner.jsp"/>-->
+        </putList>
+    </definition>
+
+    <!-- ===  Right Menu def. for student module contains all sub menus ==== -->
+    <definition name="studentInfo.rightMenu.all" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/studentInfo/menu_right.jsp"/>
+            <add value="/pages/studentInfo/menu_setting.jsp"/>
+            <!--<add value="/pages/studentInfo/courseRegistrationMenu.jsp"/>-->
+            <!--<add value="/pages/studentInfo/courseManagmentMenu.jsp"/>            -->
+        </putList>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the Student module ========== -->
+    <definition name="studentInfo.main.tile" extends="studentInfoMainLayout">
+        <put name="header" value="studentInfo.header.subMain.tile"/>
+        <put name="body" value="/pages/studentInfo/subMain.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="studentInfo.header.subMain.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+    <!-- ========= The definition of the SUMMARIZED QUARTERLY DATA in the Student module ========== -->
+    <definition name="studentInfo.termSummary.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.termSummary.tile"/>
+        <put name="body" value="/pages/studentInfo/termSummary.jsp"/>
+    </definition>
+    
+    
+    
+    <!--============term Summary page subHeader Defintion==================-->
+    <definition name="studentInfo.header.termSummary.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="ملخص البيانات الفصلية"/>
+    </definition>
+
+
+ <!-- ========= The definition of the SUMMARIZED QUARTERLY DATA in the Student module ========== -->
+    <definition name="studentInfo.termFinancial.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.termFinancial.tile"/>
+        <put name="body" value="/pages/studentInfo/termFinancial.jsp"/>
+    </definition>
+    
+     <!--============term Summary page subHeader Defintion==================-->
+    <definition name="studentInfo.header.termFinancial.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="ملخص البيانات المالية"/>
+    </definition>
+    
+    <!-- ========= The definition of the viewUserMessages in the Student module ========== -->
+    <definition name="studentInfo.viewUserMessages.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.viewUserMessages.tile"/>
+        <put name="body" value="/pages/studentInfo/viewUserMessages.jsp"/>
+    </definition>
+    <!-- ========= The definition of the viewUserSentMessages in the Student module ========== -->
+    <definition name="studentInfo.viewUserSentMessages.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.viewUserMessages.tile"/>
+        <put name="body" value="/pages/studentInfo/viewUserSentMessages.jsp"/>
+    </definition>
+    
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.viewUserMessages.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="عرض الرسائل"/>
+    </definition>
+
+
+    <!-- ========= The definition of the createUserMessages in the Student module ========== -->
+    <definition name="studentInfo.createUserMessages.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.createUserMessages.tile"/>
+        <put name="body" value="/pages/studentInfo/createUserMessages.jsp"/>
+    </definition>
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.createUserMessages.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="ارسال رسالة"/>
+    </definition>
+
+    <!-- ========= The definition of the processResultPage.jsp in the Student module ========== -->
+    <definition name="studentInfo.processResult.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.processResult.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.processResult.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="Process Result"/>
+    </definition>
+
+    <!-- ========= The definition of the viewUserMessagesDetails.jsp in the Student module ========== -->
+    <definition name="studentInfo.viewUserMessagesDetails.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.viewUserMessagesDetails.tile"/>
+        <put name="body" value="/pages/studentInfo/viewUserMessage.jsp"/>
+    </definition>
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.viewUserMessagesDetails.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="عرض رسالة"/>
+    </definition>
+
+    <!-- ========= The definition of the studMsCrsList.jsp in the Student module ========== -->
+    <definition name="studentInfo.studMsCrsList.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.studMsCrsList.tile"/>
+        <put name="body" value="/pages/studentInfo/studMsCrsList.jsp"/>
+    </definition>
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.studMsCrsList.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="الخطة الاسترشادية"/>
+    </definition>
+
+    <!-- ========= The definition of the showMessages.jsp in the Student module ========== -->
+    <definition name="studentInfo.showMessages.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.showMessages.tile"/>
+        <put name="body" value="/pages/studentInfo/showMessages.jsp"/>
+    </definition>
+    <!--============  subHeader Defintion==================-->
+    <definition name="studentInfo.header.showMessages.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="المراسلات"/>
+    </definition>
+
+     <!-- ========= The definition of studTermSchedule in tutor module ========== -->
+    <definition name="studentInfo.studTermSchedule.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.studTermSchedule.tile"/>
+        <put name="body" value="/pages/studentInfo/studTermSchedule.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.studTermSchedule.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value=" جدول اللقاءات"/>
+    </definition>
+
+     <!-- ========= The definition of studExamSchedule in tutor module ========== -->
+    <definition name="studentInfo.studExamSchedule.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.studExamSchedule.tile"/>
+        <put name="body" value="/pages/studentInfo/studExamSchedule.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.studExamSchedule.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value=" جدول الامتحانات"/>
+    </definition>
+     <!-- ========= The definition of changePassword in tutor module ========== -->
+    <definition name="studentInfo.changePassword.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.changePassword.tile"/>
+        <put name="body" value="/pages/studentInfo/changePassword.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.changePassword.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="تغيير كلمة المرور"/>
+    </definition>
+
+
+ <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="studentInfo.numberOgRegisteredHours.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.processResultPage.tile"/>
+        <put name="body" value="/pages/numberOgRegisteredHours.jsp"/>
+    </definition>
+    
+     <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="studentInfo.processResultPage.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.processResultPage.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.processResultPage.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+  <!-- ========= The definition of crsRegMain in   module ========== -->
+    <definition name="studentInfo.crsRegMain.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.crsRegMain.tile"/>
+        <put name="body" value="/pages/studentInfo/crsRegMain.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.crsRegMain.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="التسجيل و السحب و الاضافة"/>
+    </definition>
+
+  <!-- ========= The definition of noJScript in   module ========== -->
+    <definition name="studentInfo.noJScript.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.noJScript.crsRegMain.tile"/>
+        <put name="body" value="/pages/noJScriptPage.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.noJScript.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="noJScript"/>
+    </definition>
+
+     <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="studentInfo.regProcessResultPage.tile" extends="studentInfoSubLayout">
+        <put name="header" value="studentInfo.header.regProcessResultPage.tile"/>
+        <put name="body" value="/pages/studentInfo/regProcessResultPage.jsp"/>
+    </definition>
+    <definition name="studentInfo.header.regProcessResultPage.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+    <!-- ========= The definition of studSocialSurvey in tutor module ========== -->
+    <definition name="studentInfo.studSocialSurvey.tile" extends="printBasicLayout">
+        <put name="header"    value="studentInfo.header.studSocialSurvey.tile"/>
+        <put name="body"      value="/pages/studentInfo/studSocialSurvey.jsp"/>
+        <put name="subHeader" value="varient"/>
+    </definition>
+    <definition name="studentInfo.header.studSocialSurvey.tile" extends="studentInfo.subHeader.tile">
+        <put name="subtitle" value="استمارة المسح الاجتماعي "/>
+    </definition>
+    
+</tiles-definitions>

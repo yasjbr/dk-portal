@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+
+   
+  
+   <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/strutsConfig/struts-config.xml</param-value>
+        </init-param>
+
+       <init-param>
+            <param-name>config/student</param-name>
+            <param-value>/WEB-INF/strutsConfig/struts-config-student.xml</param-value>
+        </init-param>
+
+       <init-param>
+            <param-name>config/tutor</param-name>
+            <param-value>/WEB-INF/strutsConfig/struts-config-tutor.xml</param-value>
+        </init-param>
+
+       <init-param>
+            <param-name>config/deptMstr</param-name>
+            <param-value>/WEB-INF/strutsConfig/struts-config-deptMaster.xml</param-value>
+        </init-param>
+
+       <init-param>
+            <param-name>config/colgMstr</param-name>
+            <param-value>/WEB-INF/strutsConfig/struts-config-colgMaster.xml</param-value>
+        </init-param>
+
+
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>2</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>detail</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+   <servlet>
+        <servlet-name>adm_ajax_get_select</servlet-name>
+        <display-name>Admission AJAX Get Select</display-name>
+        <servlet-class>ps.edu.diyar.admission.servlets.GetSelectData</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>studListAttendReport</servlet-name>
+        <jsp-file>/pages/tutorInfo/reports/attendStudReport.jsp</jsp-file>
+    </servlet>
+
+    <servlet>
+        <servlet-name>viewStudRegCrsReport</servlet-name>
+        <jsp-file>/pages/studentInfo/reports/viewStudRegCrsReport.jsp</jsp-file>
+    </servlet>
+
+
+
+     <servlet-mapping>
+         <servlet-name>action</servlet-name>
+         <url-pattern>*.do</url-pattern>
+     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adm_ajax_get_select</servlet-name>
+        <url-pattern>/getComboData</url-pattern>
+    </servlet-mapping>
+
+   <servlet-mapping>
+        <servlet-name>studListAttendReport</servlet-name>
+        <url-pattern>/tutor/studListAttendReport</url-pattern>
+    </servlet-mapping>
+
+     <servlet-mapping>
+        <servlet-name>viewStudRegCrsReport</servlet-name>
+        <url-pattern>/student/viewStudRegCrsReport</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+ 
+
+    <taglib>
+        <taglib-uri>/tags/struts-bean</taglib-uri>
+        <taglib-location>/WEB-INF/lib/struts-bean.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>/tags/struts-html</taglib-uri>
+        <taglib-location>/WEB-INF/lib/struts-html.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>/tags/struts-logic</taglib-uri>
+        <taglib-location>/WEB-INF/lib/struts-logic.tld</taglib-location>
+    </taglib> 
+
+    <taglib>
+        <taglib-uri>/tags/struts-tiles</taglib-uri>
+        <taglib-location>/WEB-INF/lib/struts-tiles.tld</taglib-location>
+    </taglib>
+   <taglib>
+        <taglib-uri>/tags/qou-tiles</taglib-uri>
+        <taglib-location>/WEB-INF/lib/qou-Taglib.tld</taglib-location>
+    </taglib>
+
+</web-app>

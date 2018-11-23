@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+     <query
+        name="login.getUserInfo">
+        <![CDATA[
+              select new ps.edu.diyar.login.database.struct.UserInfo
+              (a.userId,a.roleid,a.email,a.screenName,a.lastVisitDate,a.mobile,b.roleCat)
+              from  ps.edu.diyar.login.database.PrtlSecUser a,
+                    ps.edu.diyar.login.database.PrtlSecRoles b
+                where
+                  a.userId=?
+                  and a.userPwd=?
+                  and a.status='active'
+                  and a.roleid=b.roleid
+
+                  order by  a.screenName
+             ]]>
+    </query>
+
+     <query
+        name="user.getUserInfo">
+        <![CDATA[
+
+              from  ps.edu.diyar.login.database.PrtlSecUser a
+                where
+                  a.userId=?
+                 order by  a.userId
+             ]]>
+    </query>
+
+</hibernate-mapping>

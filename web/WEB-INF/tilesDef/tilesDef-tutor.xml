@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+    <!-- ========= The definition of the Main Structure in the system ========== -->
+    <definition name="basicLayout" path="/pages/layout/basicLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="tutorInfo.subHeader.tile"/>
+        <put name="leftMenuBar" value="varient"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/tutorInfo/tutorInfoHeader.jsp"/>
+    </definition>
+
+    <!-- ========= The definition of the wider layout ============================= -->
+    <definition name="widerLayout" path="/pages/layout/widerLayout.jsp">
+        <put name="title" value="Dar Al-Kalima University College – Academic Portal"/>
+        <put name="header" value="tutorInfo.subHeader.tile"/>
+        <put name="body" value="variet"/>
+        <put name="rightMenuBar" value="varient"/>
+        <put name="footer" value="/pages/layout/footer.jsp"/>
+        <put name="subHeader" value="/pages/tutorInfo/tutorInfoHeader.jsp"/>
+    </definition>
+
+      <!--============Main Defintion==================-->
+    <definition name="tutorInfo.subHeader.tile" path="/pages/layout/pageHeader.jsp">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+        <putList name="items">
+            <item value="الصفحة الرئيسية" link="/tutor/main.do"/>
+            <!--<item value="اتصل بنا " link="/tutor/contactUs.do"/>-->
+            <item value="خـــروج" link="/tutor/logout.do"/>
+        </putList>
+    </definition>
+
+      <!-- ========= The definition Student module with polls or setting menues ========== -->
+    <definition name="tutorInfoMainLayout" extends="basicLayout">
+        <put name="rightMenuBar" value="tutorInfo.rightMenu.all"/>
+    </definition>
+
+
+     <!-- ===  Right Menu def. for   module contains all sub menus ==== -->
+    <definition name="tutorInfo.rightMenu.all" path="/pages/layout/verticalLayout.jsp">
+        <putList name="bar">
+            <add value="/pages/tutorInfo/tutorInfoMenu.jsp"/> 
+            <add value="/pages/tutorInfo/menu_setting.jsp"/>
+        </putList>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the Student module ========== -->
+    <definition name="tutorInfo.main.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.subMain.tile"/>
+        <put name="body" value="/pages/tutorInfo/subMain.jsp"/>
+    </definition>
+    <!--============SubMain page subHeader Defintion==================-->
+    <definition name="tutorInfo.header.subMain.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="الصفحة الرئيسية"/>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the Student module ========== -->
+    <definition name="tutorInfo.schedule.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.schedule.tile"/>
+        <put name="body" value="/pages/tutorInfo/tutorSchedule.jsp"/>
+    </definition>
+
+    <definition name="tutorInfo.header.schedule.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="جدول اللقاءات الاسبوعية"/>
+    </definition>
+
+     <!-- ========= The definition of the viewUserMessages in the Student module ========== -->
+    <definition name="tutorInfo.viewUserMessages.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.viewUserMessages.tile"/>
+        <put name="body" value="/pages/tutorInfo/viewUserMessages.jsp"/>
+    </definition>
+     <definition name="tutorInfo.header.viewUserMessages.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="عرض الرسائل"/>
+    </definition>
+
+   <!-- ========= The definition of the viewUserSentMessages in the Tutor module ========== -->
+    <definition name="tutorInfo.viewUserSentMessages.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.viewUserMessages.tile"/>
+        <put name="body" value="/pages/tutorInfo/viewUserSentMessages.jsp"/>
+    </definition>
+     <!-- ========= The definition of the viewUserMessagesDetails.jsp in the Student module ========== -->
+    <definition name="tutorInfo.viewUserMessagesDetails.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.viewUserMessagesDetails.tile"/>
+        <put name="body" value="/pages/tutorInfo/viewUserMessage.jsp"/>
+    </definition>
+    
+         <!-- ========= The definition of the viewUserMessagesDetails.jsp in the Student module ========== -->
+    <definition name="tutorInfo.viewUserMessagesRecipients.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.viewUserMessagesDetails.tile"/>
+        <put name="body" value="/pages/tutorInfo/newjsp.jsp"/>
+    </definition>
+     <definition name="tutorInfo.header.viewUserMessagesDetails.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="عرض رسالة"/>
+    </definition>
+
+     <!-- ========= The definition of the createUserMessages in the Student module ========== -->
+    <definition name="tutorInfo.createUserMessages.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.createUserMessages.tile"/>
+        <put name="body" value="/pages/tutorInfo/createUserMessages.jsp"/>
+    </definition>
+     <definition name="tutorInfo.header.createUserMessages.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="ارسال رسالة"/>
+    </definition>
+
+     <!-- ========= The definition of the processResultPage.jsp in the Student module ========== -->
+    <definition name="tutorInfo.processResult.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.processResult.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+     <definition name="tutorInfo.header.processResult.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="Process Result"/>
+    </definition>
+
+
+    <!-- ========= The definition of the main page in the tutor module ========== -->
+    <definition name="tutorInfo.sendTutorMessage.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.subMainMs.tile"/>
+        <put name="body" value="/pages/tutorInfo/sendTutorMessage.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.subMainMs.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="ارسال رسالة"/>
+    </definition>
+
+     <!-- ========= The definition of showing marks Insertion Page in tutor module ========== -->
+    <definition name="tutorInfo.marksInsertion.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.marksInsertion.tile"/>
+        <put name="body" value="/pages/tutorInfo/marksInsertionPage.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.marksInsertion.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="إدخال علامات الشعب"/>
+    </definition>
+
+
+    <!-- ========= The definition of the send message Result Page in the tutor module ========== -->
+    <definition name="tutorInfo.innerResultPage.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.innerResultPage.tile"/>
+        <put name="body" value="/pages/tutorInfo/senMessageResultPage.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.innerResultPage.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+   <!-- ========= The definition of sshowMessages in tutor module ========== -->
+    <definition name="tutorInfo.showMessages.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.showMessages.tile"/>
+        <put name="body" value="/pages/tutorInfo/showMessages.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.showMessages.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="المراسلات"/>
+    </definition>
+
+   <!-- ========= The definition of showMarkInsertion in tutor module ========== -->
+    <definition name="tutorInfo.showMarkInsertion.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.showMarkInsertion.tile"/>
+        <put name="body" value="/pages/tutorInfo/showMarkInsertion.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.showMarkInsertion.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="ادخال العلامات"/>
+    </definition>
+
+     <!-- ========= The definition of changePassword in tutor module ========== -->
+    <definition name="tutorInfo.changePassword.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.changePassword.tile"/>
+        <put name="body" value="/pages/studentInfo/changePassword.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.changePassword.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="تغيير كلمة المرور"/>
+    </definition>
+
+
+     <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="tutorInfo.processResultPage.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.processResultPage.tile"/>
+        <put name="body" value="/pages/processResultPage.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.processResultPage.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value=""/>
+    </definition>
+
+     <!-- ========= The definition of processResultPage in tutor module ========== -->
+    <definition name="tutorInfo.showAttendTbl.tile" extends="tutorInfoMainLayout">
+        <put name="header" value="tutorInfo.header.showAttendTbl.tile"/>
+        <put name="body" value="/pages/tutorInfo/showAttendTbl.jsp"/>
+    </definition>
+    <definition name="tutorInfo.header.showAttendTbl.tile" extends="tutorInfo.subHeader.tile">
+        <put name="subtitle" value="المقررات"/>
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <!-- ========== Form Bean Definitions ================================== -->
+
+    <form-beans>
+          <form-bean name="marksInsertionForm" type="ps.edu.diyar.tutorInfo.forms.MarksInsertionForm"/>
+          <form-bean name="updatePasswordForm" type="ps.edu.diyar.studentInfo.forms.UpdatePasswordForm"/>
+          <form-bean name="loadStudentRegCrsInfoForm" type="ps.edu.diyar.deptMaster.forms.LoadStudRegCrsInfoForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="null.error" type="java.lang.NullPointerException" path="/errorPageAction.do"/>
+    </global-exceptions>
+
+    <!-- ========== Global Forward Definitions =============================== -->
+
+    <global-forwards>
+        <forward name="logout" path="/logout.do"/>
+         <forward name="invalidAccess" path="/invalidAccess.do" />
+    </global-forwards>
+
+
+    <!-- ========== Action Mapping Definitions =============================== -->
+
+    <action-mappings>
+
+        
+        <action
+            type="ps.edu.diyar.deptMaster.actions.TutorDeptTermScheduleAction"
+            path="/showDeptTutorTermSchedule">
+            <forward name="success" path="dept.schedule.tile" contextRelative="true"/>
+        </action>
+        
+         <action
+            type="ps.edu.diyar.studentInfo.actions.ShowTermSummaryAction"
+            path="/showTermSummary">
+            <forward name="success" path="studentInfo.termSummary.tile" contextRelative="true"/>
+        </action>
+        
+        
+         <action
+            type="ps.edu.diyar.studentInfo.actions.ShowSelectedTermSummaryAction"
+            path="/showSelectedTermSummary">
+            <forward name="success" path="studentInfo.termSummary.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/errorPageAction"
+            parameter="/pages/invalidPage.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.common.actions.InvalidAccessAction"
+            path="/invalidAccess">
+            <forward name="success" path="/logout.do"/>
+        </action>
+        
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            parameter="/pages/drPortalIndex.jsp"
+            path="/diyarLogin"/>
+
+        <action
+            type="ps.edu.diyar.logout.actions.LogoutAction"
+            path="/logout">
+            <forward name="logoutDone" path="/diyarLogin.do"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/main"
+            parameter="/pages/deptMaster/main.jsp"
+            />
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.MainPageAction"
+            path="/deptMasterMain">
+            <forward name="mainPage" path="deptMaster.main.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.TutorsDeptListAction"
+            path="/tutorsDeptList">
+            <forward name="success" path="deptMaster.tutorsDeptList.tile"  contextRelative="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.deptMaster.actions.TutCrsListAction"
+            path="/tutCrsList">
+            <forward name="success" path="deptMaster.tutCrsList.tile"  contextRelative="true"/>
+        </action>
+
+         <action
+            type="ps.edu.diyar.deptMaster.actions.MarksApprovePageAction"
+            path="/marksApprove"
+            name="marksInsertionForm"
+            scope="request"
+            >
+            <forward name="success"  path="deptMaster.marksApprove.tile" contextRelative="true"/>
+            <forward name="approved" path="deptMaster.marksApprove.tile" contextRelative="true"/>
+        </action>
+
+            <action
+            name="marksInsertionForm"
+            type="ps.edu.diyar.deptMaster.actions.MarksApproveCheckAction"
+            input="tutorInfo.marksInsertion.tile"
+            path="/marksApproveCheck"
+            scope="request"
+            >
+            <forward name="errors"   path="deptMaster.marksApprove.tile" contextRelative="true"/>
+            <forward name="success"  path="/marksApprove.do" />
+            <forward name="saveData" path="deptMaster.innerResultPage.tile" contextRelative="true"/>
+        </action>
+
+          <action
+            type="ps.edu.diyar.studentInfo.actions.ChangePasswordAction"
+            name="updatePasswordForm"
+            scope="request"
+            validate="false"
+            path="/changePassword">
+            <forward name="showPage" path="deptMaster.changePassword.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            name="updatePasswordForm"
+            type="ps.edu.diyar.studentInfo.actions.UpdatePasswordAction"
+            validate="true"
+            input="/changePassword.do"
+            scope="request"
+            path="/updateCmaPassword">
+            <forward name="success" path="deptMaster.processResultPage.tile" contextRelative="true"/>
+            <forward name="failed" path="/changePassword.do"/>
+        </action>
+
+
+        <action
+            path="/viewloadStudentRegCrsInfo"
+            type="ps.edu.diyar.deptMaster.actions.ViewloadStudentRegCrsInfoAction">
+            <forward name="success" path="deptMaster.loadStudentRegCrsInfo.tile" contextRelative="true"/>
+         </action>
+
+       <action
+            name="loadStudentRegCrsInfoForm"
+            type="ps.edu.diyar.deptMaster.actions.LoadStudentRegCrsInfoAction"
+            validate="true"
+            input="/viewloadStudentRegCrsInfo.do"
+            scope="request"
+            path="/loadStudentRegCrsInfo">
+            <forward name="success" path="/crsReg.do"  />
+            <forward name="fail"    path="deptMaster.processResultPage.tile" contextRelative="true"/>
+         </action>
+
+
+         <action
+            path="/crsReg"
+            type="ps.edu.diyar.studentInfo.actions.CourseRegistrationAction">
+            <forward name="success" path="deptMaster.crsRegMain.tile" contextRelative="true"/>
+            <forward name="failed"  path="deptMaster.processResultPage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            path="/saveReg"
+            type="ps.edu.diyar.studentInfo.actions.RegStudCoursesAction">
+            <forward name="result" path="deptMaster.regProcessResultPage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/noJScript"
+            parameter="deptMaster.noJScript.tile"
+            />
+
+        <action
+            path="/delCrs"
+            type="ps.edu.diyar.studentInfo.actions.DeleteRegedCourseAction">
+            <forward name="result" path="/crsReg.do"/>
+            <forward name="success" path="/loadStudentRegCrsInfo.do"/>
+        </action>
+
+        <action
+            path="/viewRegStudListDept"
+            type="ps.edu.diyar.deptMaster.actions.ViewRegStudListDeptAction">
+            <forward name="success" path="deptMaster.viewRegStudListDept.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            path="/viewStudNotRegListDept"
+            type="ps.edu.diyar.deptMaster.actions.ViewStudNotRegListDeptAction">
+            <forward name="success" path="deptMaster.viewStudNotRegListDept.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            path="/goToTutAcount"
+            type="ps.edu.diyar.deptMaster.actions.GoToTutAcountAction">
+            <forward name="fail"           path="deptMaster.processResultPage.tile"   contextRelative="true"/>
+            <forward name="tutorLayout"    path="/tutor/main.do"      redirect="true" contextRelative="true"/>
+        </action>
+
+        <action
+            path="/unApproveRegStud"
+            type="ps.edu.diyar.deptMaster.actions.UnApproveRegStudAction">
+            <forward name="success" path="/viewRegStudListDept.do"/>
+            <forward name="fail"    path="deptMaster.processResultPage.tile" contextRelative="true"/>
+        </action>
+
+        <action
+            path="/studMsCrsInDptList"
+            type="ps.edu.diyar.studentInfo.actions.StudMsCrsListAction">
+            <forward name="success" path="deptMaster.studMsCrsInDptList.tile" contextRelative="true"/>
+            <forward name="fail"    path="deptMaster.processResultPage.tile" contextRelative="true"/>
+        </action>
+        
+        
+        
+         
+        
+
+    </action-mappings>
+
+    <!-- ========== Controller Configuration ================================ -->
+    <controller nocache="true" maxFileSize="1M"/>
+
+    <!-- ========== Message Resources Definitions ============================ -->
+    <message-resources parameter="ApplicationResources"/>
+
+    <!-- ========== Plug Ins Configuration ================================= -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tilesDef/tilesDef-deptMaster.xml" property="definitions-config"/>
+        <set-property value="true" property="moduleAware"/>
+        <set-property value="true" property="definitions-parser-validate"/>
+    </plug-in>
+</struts-config>

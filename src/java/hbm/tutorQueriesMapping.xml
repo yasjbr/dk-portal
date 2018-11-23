@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+     <query
+        name="tutor.getTutorInfo">
+        <![CDATA[
+               select new ps.edu.diyar.tutorInfo.database.struct.TutorInfoHolder
+               (a.empNo,a.tutorAName,a.tutorLName,a.accRankDesc,a.deptAName,a.deptNo,a.isMasterDept)
+               from  ps.edu.diyar.tutorInfo.database.PrtlTutorInfoVw a
+                where
+                  a.empNo=?
+
+                  order by  a.deptAName
+             ]]>
+    </query>
+
+
+    <query
+        name="Portal.getTutorTermsList">
+        <![CDATA[
+             select distinct new ps.edu.diyar.common.utils.TermsList(
+             rc.comp_id.termNo, term.termAName)
+             from ps.edu.diyar.studentInfo.database.RegClass rc,
+             ps.edu.diyar.studentInfo.database.RegTerm term
+             where rc.tutorNo=? and
+             rc.comp_id.termNo = term.termNo
+             order by rc.comp_id.termNo desc
+               ]]>
+    </query>
+
+    <query
+        name="Portal.getTutorSchedule">
+        <![CDATA[
+               select new  ps.edu.diyar.tutorInfo.database.struct.TutorTermScheduleDataHolder
+               (b.crsNo ,b.crsAName ,a.comp_id.classNo,rd.dayAName, rct.begTime, rct.endTime,
+                rr.roomNo, b.crHrs,a.classReg, a.comp_id.termNo)
+               from
+                    ps.edu.diyar.studentInfo.database.RegClass a,
+                    ps.edu.diyar.studentInfo.database.RegCourse b,
+                    ps.edu.diyar.tutorInfo.database.PrtlTutorInfoVw c,
+                    ps.edu.diyar.studentInfo.database.RegClassTime rct,
+                    ps.edu.diyar.studentInfo.database.RegRoom rr,
+                    ps.edu.diyar.studentInfo.database.RegDay rd
+
+               where
+                    a.comp_id.termNo=?
+                    and a.tutorNo=?
+                    and a.tutorNo=c.empNo
+                    and a.comp_id.crsNo=b.crsNo
+                    and a.comp_id.classNo = rct.comp_id.classNo
+                    and a.comp_id.crsNo = rct.comp_id.crsNo
+                    and a.comp_id.termNo = rct.comp_id.termNo
+                    and rct.dayNo = rd.dayNo
+                    and rct.roomNo = rr.roomNo
+                   
+                    order by b.crsNo
+                  ]]>
+    </query>
+
+    <query
+        name="Portal.getTutorMarkInsertion">
+        <![CDATA[
+               select new  ps.edu.diyar.tutorInfo.database.struct.TutorTermScheduleDataHolder
+               (b.crsNo ,b.crsAName ,a.comp_id.classNo,  b.crHrs,a.classReg, a.comp_id.termNo)
+               from
+                    ps.edu.diyar.studentInfo.database.RegClass a,
+                    ps.edu.diyar.studentInfo.database.RegCourse b,
+                    ps.edu.diyar.tutorInfo.database.PrtlTutorInfoVw c
+
+               where
+                    a.comp_id.termNo=?
+                    and a.tutorNo=?
+                    and a.tutorNo=c.empNo
+                    and a.comp_id.crsNo=b.crsNo
+
+                    order by b.crsNo
+                  ]]>
+    </query>
+
+    <query
+        name="tutor.getStudName">
+        <![CDATA[
+              select  new ps.edu.diyar.common.struct.LabelValue
+                (a.firstName,a.secondName,a.familyName,a.studId)
+              from ps.edu.diyar.studentInfo.database.RegStudInfo a
+              where a.studId=?
+              order by a.studId
+
+               ]]>
+    </query>
+
+
+    <query
+        name="Portal.getTutorsStudentListForMarkInsertion">
+        <![CDATA[
+	                  select new ps.edu.diyar.tutorInfo.database.struct.StudentListForCourse
+	                      (a.comp_id.studId, a.studName, a.crsMark,a.firstMark,a.secondMark,a.midMark,a.practicalMark,a.finMark  )
+
+	                      from ps.edu.diyar.tutorInfo.database.PrtlStudMarkVw a
+	                      where
+ 	                          a.comp_id.termNo= ? and
+	                          a.comp_id.crsNo = ? and
+ 	                          a.classNo = ? and
+	                          a.tutorNo = ?
+
+ 	                          order by a.studName
+             ]]>
+    </query>
+
+
+    <query
+        name="tutorInfo.getCourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? and
+              a.comp_id.calendarItem = 'MP'
+              and a.endDate>=?
+              and a.begDate<=?
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+
+
+<query
+        name="tutorInfo.getM1CourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? 
+              and a.endDate>=?
+              and a.begDate<=?
+              and a.comp_id.calendarItem = 'M1'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+    <query
+        name="tutorInfo.getM2CourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? 
+              and a.endDate>=?
+              and a.begDate<=?
+              and a.comp_id.calendarItem = 'M2'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+    <query
+        name="tutorInfo.getMMidCourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? 
+              and a.endDate>=?
+              and a.begDate<=?
+              and a.comp_id.calendarItem = 'MM'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+    <query
+        name="tutorInfo.getMPracticalCourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? 
+              and a.endDate>=?
+              and a.begDate<=?
+              and a.comp_id.calendarItem = 'ML'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+    <query
+        name="tutorInfo.getMFinCourseExamsInfo">
+        <![CDATA[
+
+         from ps.edu.diyar.studentInfo.database.RegCalendar  a
+         where
+              a.comp_id.termNo = ? 
+              and a.endDate>=?
+              and a.begDate<=?
+              and a.comp_id.calendarItem = 'MF'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+    <query
+        name="tutor.IsClassMarksApproved">
+        <![CDATA[
+
+         from ps.edu.diyar.tutorInfo.database.PrtlTutorMarkApprovment  a
+         where
+                  a.comp_id.termNo = ?
+              and a.comp_id.crsNo = ?
+              and a.comp_id.classNo = ?
+              and a.approve='Y'
+
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+
+
+    <query name="portal.TutorStudentsMarksApprovedData">
+        <![CDATA[
+	            from ps.edu.diyar.tutorInfo.database.PrtlTutorMarkApprovment a
+	                 where
+	                         a.comp_id.termNo = ?
+                         and a.comp_id.crsNo = ?
+                         and a.comp_id.classNo = ?
+                         
+                         order by a.comp_id.termNo
+
+              ]]>
+    </query>
+
+
+    <query name="portal.TutorStudentsMarksExist">
+        <![CDATA[
+	            from ps.edu.diyar.tutorInfo.database.PrtlTutorStudMark a
+	                 where
+	                     a.comp_id.termNo= ? and
+	                     a.comp_id.crsNo = ? and
+ 	                     a.comp_id.studId= ?
+
+ 	                     order by a.comp_id.termNo
+              ]]>
+    </query>
+
+
+    <query name="tutor.getStudClassInfoList">
+        <![CDATA[
+	            from ps.edu.diyar.tutorInfo.database.PrtlStudAttendanceVw a
+	                 where
+	                     a.comp_id.termNo= ? and
+	                     a.comp_id.classNo = ? and
+	                     a.comp_id.crsNo = ?  and
+	                     a.tutorNo=?
+ 	                     order by a.studName asc
+              ]]>
+    </query>
+
+</hibernate-mapping>

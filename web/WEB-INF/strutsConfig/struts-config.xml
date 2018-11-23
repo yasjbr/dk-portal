@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <!-- 
+========== Form Bean Definitions ================================== -->
+
+    <form-beans>
+
+       <form-bean name="loginForm"          type="ps.edu.diyar.login.forms.LoginForm"/>
+       <form-bean name="admLoginForm"       type="ps.edu.diyar.admission.forms.AdmLoginForm"/>
+       <form-bean name="admApplicationForm" type="ps.edu.diyar.admission.forms.AdmApplicationForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="null.error" type="java.lang.NullPointerException" path="/errorPageAction.do"/>
+    </global-exceptions>
+
+    <!-- 
+========== Global Forward Definitions =============================== -->
+
+    <global-forwards>
+        <forward name="login"      path="/login.do"/>
+        <forward name="invalidAccess" path="/invalidAccess.do" />
+    </global-forwards>
+
+    <!-- 
+========== Action Mapping Definitions =============================== -->
+
+    <action-mappings>
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/errorPageAction"
+            parameter="/pages/invalidPage.jsp"
+            />
+
+        <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/noJScript"
+            parameter="adm.noJScript.tile"
+            />
+
+
+
+         <action
+            type="ps.edu.diyar.common.actions.InvalidAccessAction"
+            path="/invalidAccess">
+            <forward name="success" path="adm.loginPage.tile" contextRelative="true" redirect="true"/>
+        </action>
+
+        <action
+            type="ps.edu.diyar.login.actions.IndexPageAction"
+            path="/diyarLogin">
+            <forward name="success" path="/pages/drPortalIndex.jsp" contextRelative="true"/>
+        </action>
+         
+
+         <action
+            type="ps.edu.diyar.login.actions.CaptchaImageAction"
+            path="/captchaImage">
+        </action>
+
+        <action
+            name="loginForm"
+            type="ps.edu.diyar.login.actions.LoginAction"
+            validate="true"
+            input="/diyarLogin.do"
+            scope="request"
+            path="/login">
+            <forward name="studLayout"     path="/student/main.do"    redirect="true" contextRelative="true"/>
+            <forward name="tutorLayout"    path="/tutor/main.do"      redirect="true" contextRelative="true"/>
+            <forward name="deptMstrLayout" path="/deptMstr/main.do"   redirect="true" contextRelative="true"/>
+            <forward name="colgMstrLayout" path="/colgMstr/main.do"   redirect="true" contextRelative="true"/>
+            <forward name="fail" path="/pages/drPortalIndex.jsp" contextRelative="true"/>
+        </action>
+
+
+         <action
+            type="org.apache.struts.actions.ForwardAction"
+            path="/admLoginView"
+            parameter="adm.loginPage.tile"/>
+
+         <action
+            name="admLoginForm"
+            type="ps.edu.diyar.admission.actions.AdmLoginAction"
+            validate="true"
+            scope="request"
+            input="/admLoginView.do"
+            path="/admLogin">
+            <forward name="success" path="/admApplicationLoad.do" redirect="true" contextRelative="true"/>
+            <forward name="fail"  path="/admLoginView.do"/>
+        </action>
+
+      <action
+            name="admApplicationForm"
+            type="ps.edu.diyar.admission.actions.AdmApplicationLoadAction"
+            path="/admApplicationLoad"
+            scope="request"
+            validate="false">
+            <forward name="success" path="adm.application.tile"   contextRelative="true"/>
+       </action>
+
+        <action
+            name="admApplicationForm"
+            validate="true"
+            input="adm.application.tile"
+            scope="request"
+            type="ps.edu.diyar.admission.actions.AdmApplicationSaveAction"
+            path="/admApplicationSave" >
+            <forward name="success" path="adm.application.tile"   contextRelative="true"/>
+       </action>
+
+      <action
+            type="ps.edu.diyar.logout.actions.LogoutAction"
+            path="/logout">
+            <forward name="logoutDone" path="/admLoginView.do"/>
+        </action>
+
+        <action
+            path="/downloadMsgAtt"
+            type="ps.edu.diyar.messaging.actions.DownloadMsgAttAction">
+            <forward name="downloadResult" path="main.resultsAndErrors.tile" contextRelative="true"/>
+        </action>
+
+
+        <action
+            path="/downloadSrvyAtt"
+            prefix="srvy"
+            type="ps.edu.diyar.messaging.actions.DownloadMsgAttAction">
+            <forward name="downloadResult" path="main.resultsAndErrors.tile" contextRelative="true"/>
+        </action>
+
+
+    </action-mappings>
+
+    <!-- 
+========== Controller Configuration ================================ -->
+    <controller nocache="true" maxFileSize="1M"/>
+
+    <!-- 
+========== Message Resources Definitions ============================ -->
+    <message-resources parameter="ApplicationResources"/>
+
+    <!-- 
+========== Plug Ins Configuration ================================= -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tilesDef/tilesDef.xml" property="definitions-config"/>
+        <set-property value="true" property="moduleAware"/>
+        <set-property value="true" property="definitions-parser-validate"/>
+    </plug-in>
+</struts-config>
