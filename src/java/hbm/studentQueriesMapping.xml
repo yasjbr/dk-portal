@@ -1,0 +1,678 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <query
+        name="stud.getCurrentTerm">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.PrtlSetup stp
+                  where stp.setupKey='curentTerm'
+                  ]]>
+    </query>
+
+
+<query
+        name="stud.getCrsRegTerm">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.PrtlSetup stp
+                  where stp.setupKey='crsRegTerm'
+                  ]]>
+    </query>
+<query
+        name="stud.getMinFinValue">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.PrtlSetup stp
+                  where stp.setupKey='minFinV'
+                  ]]>
+    </query>
+    
+    <!-- this query to get the student term number when he got specilaization-->
+    <query
+        name="stud.getStudentSpecilaizingTermNo">
+        <![CDATA[
+             select max(spec.comp_id.termNo)
+             from ps.edu.diyar.studentInfo.database.RegStudSpec as spec
+             where spec.comp_id.studId = ?
+              ]]>
+    </query>
+
+    <!-- this query to get the student main info exist in all pages -->
+    <query
+        name="stud.getStudentInfo">
+        <![CDATA[
+             select new ps.edu.diyar.studentInfo.database.struct.StudentInfoHolder
+             (
+               info.studId,info.firstName,info.secondName,info.thirdName, info.familyName,
+               rc.collegeAName, rs.specAName,
+               spec.msNo,spec.comp_id.termNo, spec.specNo,info.joinTermNo ,rs.specTypeNo,rs.deptNo ,info.warnStatus
+             )
+             from ps.edu.diyar.studentInfo.database.RegStudInfo as info,
+                  ps.edu.diyar.studentInfo.database.RegStudSpec as spec,
+                  ps.edu.diyar.studentInfo.database.RegSpec as rs,
+                  ps.edu.diyar.studentInfo.database.RegCollege as rc
+              where info.studId=? and
+                    spec.comp_id.termNo=? and
+                    info.studId = spec.comp_id.studId and
+                    spec.specNo=rs.specNo
+                    and rs.collegeNo=rc.collegeNo
+              ]]>
+    </query>
+
+    <!-- this query to get the student last term number when he register for a course-->
+    <query
+        name="stud.getStudentLastTermNo">
+        <![CDATA[
+            select max(regS.comp_id.termNo)
+            from ps.edu.diyar.studentInfo.database.RegStud regS
+            where regS.comp_id.studId=?
+              ]]>
+    </query>
+
+    <!-- this query to get the student term status -->
+    <query
+        name="Portal.getStudentCurrentTermSummary">
+        <![CDATA[
+            from  ps.edu.diyar.studentInfo.database.RegTermSummary termSummary
+            where
+                termSummary.comp_id.studId=?
+            and termSummary.comp_id.termNo=?
+              ]]>
+    </query>
+
+
+<!-- this query to get the Course  Weights -->
+    <query
+        name="Portal.getCourseWht">
+        <![CDATA[
+            from  ps.edu.diyar.studentInfo.database.RegCrsWht courseWht
+            where
+                courseWht.comp_id.crsNo=?
+              ]]>
+    </query>
+    
+     <!-- this query to get the student terms list -->
+    <query
+        name="Portal.getStudentTermsList">
+        <![CDATA[
+             select distinct new ps.edu.diyar.common.utils.TermsList
+             (regS.comp_id.termNo, term.termAName)
+             from ps.edu.diyar.studentInfo.database.RegStud regS,
+                  ps.edu.diyar.studentInfo.database.RegTerm term
+             where
+                 regS.comp_id.studId=? and
+                 regS.comp_id.termNo = term.termNo
+             ORDER BY regS.comp_id.termNo desc
+               ]]>
+    </query>
+
+       <query name="Portal.getStudentCurrentTermCourseSummary">
+           <![CDATA[
+             select new ps.edu.diyar.studentInfo.database.struct.TermCoursesSummaryHolder
+                    (
+                      a.crsStatus, a.regCourseStatus.statusAName, a.crsMark,a.first,a.second,a.mid,a.practical,a.finalm, a.regCourse.crHrs, a.regCourse.crsAName,
+                      a.comp_id.crsNo ,a.crsClass ,a.comp_id.termNo
+                    )
+              from  ps.edu.diyar.studentInfo.database.RegStud a
+              where a.comp_id.studId= ? and
+                    a.comp_id.termNo=?
+
+
+    ]]>
+       </query>
+
+
+    <!-- this query to get the student selected term courses status-->
+    <query
+        name="Portal.getStudentTermCourseSummary">
+        <![CDATA[
+                select new ps.edu.diyar.studentInfo.database.struct.TermCoursesSummaryHolder
+                (
+                  a.crsStatus, a.regCourseStatus.statusAName, a.crsMark,a.first,a.second,a.mid,a.practical,a.finalm, a.regCourse.crHrs, a.regCourse.crsAName,
+                  a.comp_id.crsNo ,a.crsClass,a.comp_id.termNo
+                )
+             from  ps.edu.diyar.studentInfo.database.RegStud a
+             where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+               ]]>
+    </query>
+
+
+    <query
+        name="stud.getTutorOfThisCrs">
+        <![CDATA[
+             select  new ps.edu.diyar.common.struct.LabelValue
+                (b.firstName,b.secondName,b.familyName,b.empNo)
+             from  ps.edu.diyar.studentInfo.database.RegClass a,
+                   ps.edu.diyar.studentInfo.database.RegEmploye b
+             where
+                     a.tutorNo=b.empNo
+                 and a.comp_id.crsNo=?
+                 and a.comp_id.classNo=?
+                 and a.comp_id.termNo=?
+               ]]>
+    </query>
+
+    <query
+        name="portal.getCrsInfo">
+        <![CDATA[
+              select  new ps.edu.diyar.studentInfo.database.struct.CrsInfo
+                   (a.crsNo,a.crsAName)
+              from ps.edu.diyar.studentInfo.database.RegCourse a
+              where a.crsNo=?
+
+              order by a.crsNo
+               ]]>
+    </query>
+
+
+    <query
+        name="Portal.getStudSchedule">
+        <![CDATA[
+               select new  ps.edu.diyar.tutorInfo.database.struct.TutorTermScheduleDataHolder
+               (a.comp_id.crsNo ,a.crsAName ,a.comp_id.classNo,a.dayAName, a.begTime, a.endTime,
+                a.roomNo, a.crHrs,a.classReg, a.comp_id.termNo)
+               from
+                    ps.edu.diyar.studentInfo.database.PrtlStudScheduleVw a
+
+               where
+                    a.comp_id.termNo=?
+                    and a.comp_id.studId=?
+
+                         order by a.comp_id.crsNo,a.dayNo
+                  ]]>
+    </query>
+
+    <query
+        name="Portal.getStudExamSchedule">
+        <![CDATA[
+                 from ps.edu.diyar.studentInfo.database.RegStudExamVw a
+
+               where
+                    a.comp_id.termNo=?
+                    and a.comp_id.studId=? 
+
+                         order by a.sessionDate desc
+                  ]]>
+    </query>
+
+    <query
+        name="portal.getPrtlSetupValue">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlSetup a
+              where a.setupKey=?
+
+              order by a.setupKey
+               ]]>
+    </query>
+
+    <query
+        name="stud.getStudRegApproveStatusForCalItm">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRegStudApprove a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+                 and a.comp_id.calendarItem=?
+
+              order by a.comp_id.calendarItem
+               ]]>
+    </query>
+
+    <query
+        name="stud.getStudRegApproveRec">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRegStudApprove a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+                 and a.regApp='Y'
+
+              order by a.comp_id.calendarItem
+               ]]>
+    </query>
+
+    <query
+        name="stud.getCalendarItemInfo">
+        <![CDATA[
+              select new ps.edu.diyar.studentInfo.database.struct.CalendarItemInfo
+              (a.itemNo,a.itemAName, b.begDate, b.endDate, c.termAName)
+              from ps.edu.diyar.studentInfo.database.RegCalendarItem a ,
+                   ps.edu.diyar.studentInfo.database.RegCalendar b,
+                   ps.edu.diyar.studentInfo.database.RegTerm c
+              where
+                  a.itemNo=b.comp_id.calendarItem
+              and b.comp_id.termNo=c.termNo
+              and a.isActive='1'
+              and a.itemNo=?
+              and b.comp_id.termNo=?
+
+              order by b.comp_id.termNo
+               ]]>
+    </query>
+
+    <query
+        name="Portal.getStudRegisteredCrs">
+        <![CDATA[
+           select new ps.edu.diyar.studentInfo.database.struct.MsCoursesList
+           (a.comp_id.studId, a.comp_id.termNo,a.comp_id.crsNo,a.crHrs,
+            a.crsAName,a.comp_id.classNo,a.begTime,a.endTime,
+            a.dayNo,a.dayAName,a.empNo,a.tutorAName)
+              from ps.edu.diyar.studentInfo.database.PrtlStudRegisteredCrsVw a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.comp_id.termNo
+               ]]>
+    </query>
+
+    <query name="portal.getAvaliableCoursesList">
+        select new ps.edu.diyar.studentInfo.database.struct.MsCoursesList
+        (a.msCrsType,a.msCrsTypeAName, a.comp_id.crsNo,  a.crsAName,a.crHrs, a.crsMark, a.crsStatus,
+          a.statusAName,a.comp_id.regTermNo,a.comp_id.classNo,a.begTime,a.endTime,a.dayNo,a.dayAName,a.tutorNo,a.tutorAName)
+        from   ps.edu.diyar.studentInfo.database.PrtlStudMsCsVw a
+        where
+              a.comp_id.regTermNo = ?
+          and a.msNo= ?
+          and a.comp_id.studId = ?
+          <!--and a.msCrsType !='6'-->
+
+
+          order by  a.msCrsType,a.comp_id.crsNo,a.comp_id.classNo
+    </query>
+
+    <query
+        name="stud.getRegSettingInfo">
+        <![CDATA[
+               from ps.edu.diyar.studentInfo.database.RegSetting a
+               where
+               a.termNo=( select  max(b.termNo)  from ps.edu.diyar.studentInfo.database.RegSetting b)
+               ]]>
+    </query>
+    
+    <query
+        name="stud.getRegWarnSettingInfo">
+        <![CDATA[
+               from ps.edu.diyar.studentInfo.database.RegWarnSetting a
+               where
+               a.comp_id.termNo=( select  max(b.comp_id.termNo)  from ps.edu.diyar.studentInfo.database.RegWarnSetting b)
+               ]]>
+    </query>
+
+     <query
+        name="Portal.getExistCalenderDates">
+        <![CDATA[
+                       from   ps.edu.diyar.studentInfo.database.RegCalendar cal
+                       where cal.comp_id.calendarItem=?
+                       and cal.comp_id.termNo =?
+                       and cal.isActive='1'
+
+
+                     ]]>
+    </query>
+
+
+     <query
+        name="portal.getTermInfo">
+        <![CDATA[
+                       from   ps.edu.diyar.studentInfo.database.RegTerm a
+                       where
+                            a.termNo =?
+                          order by a.termNo
+
+                     ]]>
+    </query>
+
+     <query
+        name="stud.getStudCalendarItem">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRegStudApprove a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.comp_id.calendarItem
+
+                     ]]>
+    </query>
+
+    <query
+        name="stud.getCheckCalendarItemDate">
+        <![CDATA[
+                       from   ps.edu.diyar.studentInfo.database.RegCalendar cal
+                       where cal.comp_id.calendarItem=?
+                       and cal.comp_id.termNo =?
+                       and cal.endDate>=?
+                       and cal.begDate<=?
+                       and cal.isActive='1'
+
+
+                     ]]>
+    </query>
+
+     <query
+        name="stud.getPreReqCourse">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.RegCoursePrereq a
+              where
+                     a.comp_id.crsNo=?
+                     and a.isActive='1'
+                     and a.comp_id.groupNo=1
+              order by a.comp_id.crsNo
+
+                     ]]>
+    </query>
+
+
+     <query
+        name="stud.getBanksDetailsList">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.SasBanksVu a
+              order by a.comp_id.bnkCode,a.comp_id.bnkBraCode
+
+                     ]]>
+    </query>
+
+
+     <query
+        name="stud.getStudHoursSumReportList">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRepCsrlistStudVw a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.crsAName
+
+                     ]]>
+    </query>
+
+<query
+        name="stud.getStudHoursFeesToPay">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.RegSpecToPay a
+              where
+                a.specNo=?
+              order by a.specNo
+
+                     ]]>
+    </query>
+    
+     <query
+        name="stud.getStudInstallmentReportList">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRepInstallmentStudVw a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.dueDate
+
+                     ]]>
+    </query>
+
+     <query
+        name="stud.getStudFeesReportList">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRepFinancialStudVw a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.comp_id.finCode
+
+                     ]]>
+    </query>
+
+     <query
+        name="stud.getStudScholarshipReportList">
+        <![CDATA[
+              from ps.edu.diyar.studentInfo.database.PrtlRepScholarStudVw a
+              where
+                     a.comp_id.studId=?
+                 and a.comp_id.termNo=?
+
+              order by a.comp_id.schlrCode
+
+                     ]]>
+    </query>
+    <!-- add to get student Balance -->
+    <query
+        name="Portal.getSasStudBalanceTemp">
+        <![CDATA[
+                   from ps.edu.diyar.studentInfo.database.SasStudFtermCard fsum
+                   where fsum.comp_id.studId=?
+                   and   fsum.comp_id.termNo =?
+                   and   fsum.comp_id.termNo >= '131'                   
+               ]]>
+    </query>
+
+    <!-- add to get student Balance from view -->
+    <query
+        name="Portal.getSasStudBalanceTemp2">
+        <![CDATA[
+                   from ps.edu.diyar.studentInfo.database.PrtlStudBalanceVw fsum
+                   where fsum.comp_id.studId=?
+                   and   fsum.comp_id.termNo =?
+                   and   fsum.comp_id.termNo >= '131'
+               ]]>
+    </query>
+
+    <query
+        name="Portal.getSasStudLoan">
+        <![CDATA[
+                   from ps.edu.diyar.studentInfo.database.SasInstalmentStud fsum
+                   where fsum.comp_id.studId=?
+                   and   fsum.comp_id.termNo =?
+                   and   fsum.comp_id.termNo >= '131'
+               ]]>
+    </query>
+
+    <query
+        name="stud.getSurveyStudInfo">
+        <![CDATA[
+                  from ps.edu.diyar.studentInfo.database.SurveyStudInfoVw as info
+
+              where     info.studId=?
+                ]]>
+    </query>
+
+    <query
+        name="stud.getSrvyMasterInfo">
+        <![CDATA[
+                  from ps.edu.diyar.studentInfo.database.SrvyMaster as info
+                   where info.comp_id.studId=?
+                   and   info.comp_id.termNo =?
+                ]]>
+    </query>
+
+    <query
+        name="stud.getSrvyAcademicDetailInfo">
+        <![CDATA[
+                  from ps.edu.diyar.studentInfo.database.SrvyAcademicDetailVw as info
+                   where info.comp_id.studId=?
+                   and   info.comp_id.termNo =?
+                   and   info.comp_id.relativeType =?
+                ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvWorkDtlInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyWorkDetail a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                      and a.comp_id.workerType=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvWorkTypeDtl">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyWorkTypeDtl a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                      and a.comp_id.wrkType=?
+                  ]]>
+    </query>
+
+
+    <query
+        name="stud.getStudSocialSrvWorkRelativeInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyWorkRelative a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                      and a.wrlIsLiveIn=?
+                  ]]>
+    </query>
+
+    <query
+        name="Portal.getPayer">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyTuition a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+
+    <query
+        name="stud.getStudSocialHealthDetail">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyHealthDetail a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvHousingInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyHousing a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+
+    <query
+        name="stud.getStudSocialSrvHousingBuildingInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyHousingBuilding a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvHousingLandInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyHousingLand a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvHousingCarInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyHousingCar a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvLoanInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyLoan a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvLoanPersonal">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyLoanPersonal a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvLoanFamily">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyLoanFamily a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="stud.getStudSocialSrvStrategicInfo">
+        <![CDATA[
+                from  ps.edu.diyar.studentInfo.database.SrvyStrategic a
+                  where
+                          a.comp_id.studId=?
+                      and a.comp_id.termNo=?
+                  ]]>
+    </query>
+
+    <query
+        name="Portal.getStudentCurrentTermFinancial">
+        <![CDATA[
+            from  ps.edu.diyar.studentInfo.database.SasStudFtermCard termFinancial
+            where
+                termFinancial.comp_id.studId=?
+            and termFinancial.comp_id.termNo=?
+              ]]>
+    </query>
+    <query
+        name="stud.getStudentLastFinancialTermNo">
+        <![CDATA[
+            select max(termFinancialDetail.comp_id.termNo)
+            from ps.edu.diyar.studentInfo.database.SasStudFtermCardDtl termFinancialDetail
+            where termFinancialDetail.comp_id.studId=?
+            and  termFinancialDetail.comp_id.termNo<?
+              ]]>
+    </query>
+    <query
+        name="Portal.getStudentCurrentTermFinancialDetail">
+        <![CDATA[
+            from  ps.edu.diyar.studentInfo.database.SasStudFtermCardDtl termFinancialDetail
+            where 
+                termFinancialDetail.comp_id.studId=?
+            and termFinancialDetail.comp_id.termNo=?
+              ]]>
+    </query>
+    
+    
+    
+     <query
+        name="Portal.getStudentFeesToPay">
+        <![CDATA[
+            from  ps.edu.diyar.studentInfo.database.SasFeesToPay studFeesToPay
+            where 
+                studFeesToPay.comp_id.studId=?
+            and studFeesToPay.comp_id.termNo=?
+            and studFeesToPay.comp_id.finCode='19'
+            
+            
+              ]]>
+    </query>
+</hibernate-mapping>
